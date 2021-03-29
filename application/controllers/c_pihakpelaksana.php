@@ -41,92 +41,110 @@ class C_Pihakpelaksana extends CI_Controller {
 
 	public function tampil_tambah_data_lapangan()
 	{
+		$ambil_data['data_lapangan_nik']= $this->model_data->ambil_data_alternatif();
+		$ambil_data['data_lapangan_c1']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c2']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c3']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c4']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c5']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c6']= $this->model_data->data_subkriteria();
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
 		
-		$this->load->view('v_tambah_data_survei_longlist' );		
+		$this->load->view('pihakpelaksana/v_tambah_data_survei_longlist',$ambil_data );		
 	}
 
-	// public function tambah_data_lapangan()
-	// {
-	// 	$kode_longlist = $this->input->post('kode_longlist');
-	// 	$nik_longlist = $this->input->post('nik_longlist');
-	// 	$nama_alternatif = $this->input->post('nama_alternatif');
-	// 	$nama_dusun = $this->input->post('nama_dusun');
-	// 	$rt = $this->input->post('rt');
-	// 	$rw = $this->input->post('rw');
+	public function tambah_data_lapangan()
+	{
+		$id_alternatif = $this->input->post('id_alternatif');
+		$c1 = $this->input->post('c1');
+		$c2 = $this->input->post('c2');
+		$c3 = $this->input->post('c3');
+		$c4 = $this->input->post('c4');
+		$c5 = $this->input->post('c5');
+		$c6 = $this->input->post('c6');
 
-	// 	$data_insert = array(
-    //         'kode_longlist'  => $kode_longlist,
-    //         'nik_longlist'  => $nik_longlist,
-    //         'nama_alternatif'     => $nama_alternatif,
-    //         'nama_dusun' => $nama_dusun,
-    //         'rt'     => $rt,
-    //         'rw' => $rw
-    //     );
 
+		$data_insert = array(
+            'id_alternatif'  => $id_alternatif,
+            'c1'  => $c1,
+			'c2'  => $c2,
+			'c3'  => $c3,
+			'c4'  => $c4,
+			'c5'  => $c5,
+			'c6'  => $c6
+        );
+
+        // print($c1);die();
+        $this->model_data->insert($data_insert,'data_survey_lapangan');
+
+		redirect('c_pihakpelaksana/data_survey_lapangan');		
+	}
+
+	
+	public function tampil_edit_data_lapangan()
+	{
+		$id_survei_longlist = $this->input->get('id_survei_longlist');
+		// print($id_survei_longlist);die();
+		$where = array(            
+            'id_survei_longlist' =>  $id_survei_longlist
+        );
+
+        $ambil_data['data_survey_lapangan'] = $this->model_data->data_survei_lapangan_where($where);
+		$ambil_data['data_lapangan_nik']= $this->model_data->ambil_data_alternatif();
+		$ambil_data['data_lapangan_c1']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c2']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c3']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c4']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c5']= $this->model_data->data_subkriteria();
+		$ambil_data['data_lapangan_c6']= $this->model_data->data_subkriteria();
+		// print($ambil_data['data_lapangan_nik'][4]['nik_alternatif']);die();
+        $this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_edit_data_survei_longlist' ,$ambil_data);
+
+	}
+
+	public function edit_data_lapangan()
+	{
+		$id_survei_longlist = $this->input->post('id_survei_longlist');
+		$id_alternatif = $this->input->post('id_alternatif');
+		$c1 = $this->input->post('c1');
+		$c2 = $this->input->post('c2');
+		$c3 = $this->input->post('c3');
+		$c4 = $this->input->post('c4');
+		$c5 = $this->input->post('c5');
+		$c6 = $this->input->post('c6');
+
+
+        $where = array(
+            'id_survei_longlist' => $id_survei_longlist
+        );
+
+        $data = array(
+            'id_alternatif'  => $id_alternatif,
+            'c1'  => $c1,
+			'c2'  => $c2,
+			'c3'  => $c3,
+			'c4'  => $c4,
+			'c5'  => $c5,
+			'c6'  => $c6
+        );
+        $this->model_data->edit_data($where,$data,'data_survey_lapangan');
         
-    //     $this->model_data->insert($data_insert,'data_longlist');
-
-	// 	redirect('c_admin/data_longlist');		
-	// }
+        redirect('c_pihakpelaksana/data_survey_lapangan');		
+	}
 
 	public function hapus_data_lapangan()
 	{
-		$id_surveylapangan = $this->input->get('id_surveylapangan');
-		$where = array(            
-            'id_surveylapangan' =>  $id_surveylapangan
-        );
+		$id_survei_longlist = $this->input->get('id_survei_longlist');
 
-		// print($id_longlist);die();
+		$where = array(            
+            'id_survei_longlist' =>  $id_survei_longlist
+        );
         $this->model_data->delete_data($where,'data_survey_lapangan');
-     	// redirect('c_admin/data_longlist');		   
+     	redirect('c_pihakpelaksana/data_survey_lapangan');		   
 	}
-
-	public function tampil_edit_data_lapangan()
-	{
-		$id_surveylapangan = $this->input->get('id_surveylapangan');
-		$where = array(            
-            'id_surveylapangan' =>  $id_surveylapangan
-        );
-
-        $data['data_survey_lapangan'] = $this->model_data->pilih_data($where ,'data_survey_lapangan');
-
-
-        $this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
-		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
-		
-		$this->load->view('v_edit_data_longlist' ,$data);
-
-	}
-
-	// public function edit_data_lapangan()
-	// {
-	// 	$id_longlist = $this->input->get('id_longlist');
-	// 	$kode_longlist = $this->input->post('kode_longlist');
-	// 	$nik_longlist = $this->input->post('nik_longlist');
-	// 	$nama_alternatif = $this->input->post('nama_alternatif');
-	// 	$nama_dusun = $this->input->post('nama_dusun');
-	// 	$rt = $this->input->post('rt');
-	// 	$rw = $this->input->post('rw');
-
-
-    //     $where = array(
-    //         'id_longlist' => $id_longlist
-    //     );
-
-    //     $data = array(
-    //         'kode_longlist' => $kode_longlist,
-    //         'nik_longlist' => $nik_longlist,
-    //         'nama_alternatif' => $nama_alternatif,
-    //         'nama_dusun' => $nama_dusun,
-    //         'rt' => $rt,
-    //         'rw' => $rw
-    //     );
-    //     $this->model_data->edit_data($where,$data,'data_longlist');
-        
-    //     redirect('c_admin/data_longlist');		
-	// }
 
 
 

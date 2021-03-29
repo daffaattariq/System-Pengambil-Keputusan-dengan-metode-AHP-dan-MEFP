@@ -5,12 +5,12 @@ class C_Admin extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->library('form_validation');
+		// $this->load->library('form_validation');
 		if(!$this->session->userdata('level'))
 		{
 			redirect('login');
 		}
-		$this->load->model('model_data');
+		// $this->load->model('model_data');
 	}
 
 	public function index()
@@ -131,6 +131,7 @@ class C_Admin extends CI_Controller {
 				'rw' => $rw
 			);
 			$this->model_data->edit_data($where,$data,'data_alternatif');
+			$this->session->set_flashdata('success','Berhasil Mengedit Data '. $nama_alternatif);
 			redirect('c_admin/data_alternatif');	
 		}	
 	}
@@ -268,6 +269,7 @@ class C_Admin extends CI_Controller {
 				'level' => $level
 			);
 			$this->model_data->edit_data($where,$data_login,'data_login');
+			$this->session->set_flashdata('success','Berhasil Mengedit Data ');
 			redirect('c_admin/data_login');	
 		}		
 	}
@@ -429,6 +431,7 @@ class C_Admin extends CI_Controller {
 				'nama_kriteria'  => $nama_kriteria
 			);
 			$this->model_data->edit_data($where,$data,'data_kriteria');
+			$this->session->set_flashdata('success','Berhasil Mengedit Data ');
 			redirect('c_admin/data_kriteria	');		
 		}		
 	}
@@ -560,6 +563,7 @@ class C_Admin extends CI_Controller {
 				'nilai_subkriteria' => $nilai_subkriteria
 			);
 			$this->model_data->edit_data($where,$data,'data_subkriteria');
+			$this->session->set_flashdata('success','Berhasil Mengedit Data ');
 			redirect('c_admin/data_subkriteria	');	
 		}		
 	}

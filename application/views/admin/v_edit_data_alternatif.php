@@ -45,6 +45,7 @@
                                     </div> -->
                                     <div class="form-group">
                                         <label for="NIK">NIK</label>
+                                        <input type="text" value="<?php echo $data_alternatif['id_alternatif']?>" name="id_alternatif" hidden></input>
                                         <input id="nik_alternatif" type="number" value="<?php echo $data_alternatif['nik_alternatif']?>" class="form-control <?php if($this->session->flashdata('nik_alternatif')) {?> form-control is-invalid <?php }?>" name=nik_alternatif required>                                                
                                         <snap class='text-danger'><?php echo $this->session->flashdata('nik_alternatif'); ?></snap>
                                     </div>

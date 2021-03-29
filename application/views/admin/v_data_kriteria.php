@@ -33,6 +33,17 @@
                         <!-- <a href="<?php echo base_url('c_admin/tampil_pembobotan') ?>"><button class="btn btn-primary btn-sm float-right"  type="button">Pembobotan</button></a> -->
                     </h3>
                     <div class="card-body">
+                    <?php
+                        if ($this->session->flashdata('success')){?>
+                        <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <?php echo $this->session->flashdata('success')?>
+                        </div>
+                    <?php
+                        }
+                    ?>
                                                  
                         <table class="table table-hover" id="mytable">
                             <thead>

@@ -41,6 +41,7 @@
                                 <form action="<?php echo base_url('c_admin/edit_data_kriteria') ?>?id_kriteria=<?php echo $data_kriteria['id_kriteria']?>" method="post">
                                     <div class="form-group">
                                         <label for="Kode" class="col-form-label">Kode Kriteria</label>
+                                        <input type="text" value="<?php echo $data_kriteria['id_kriteria']?>" name="id_kriteria" hidden></input>
                                         <input id="kode_kriteria" type="text" class="form-control <?php if($this->session->flashdata('kode_kriteria')) {?> form-control is-invalid <?php }?>" value="<?php echo $data_kriteria['kode_kriteria']?>" name="kode_kriteria" required>
                                         <snap class='text-danger'><?php echo $this->session->flashdata('kode_kriteria'); ?></snap>
                                     </div>                                           

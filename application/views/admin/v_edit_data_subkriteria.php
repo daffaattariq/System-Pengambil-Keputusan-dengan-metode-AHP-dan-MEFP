@@ -61,6 +61,7 @@
                                     </div>           
                                     <div class="form-group">
                                         <label for="Kode_Sub_kriteria" class="col-form-label">Kode Sub kriteria</label>
+                                        <input type="text" value="<?php echo $data_subkriteria['id_subkriteria']?>" name="id_subkriteria" hidden></input>
                                         <input id="kode_subkriteria" type="text" class="form-control <?php if($this->session->flashdata('kode_subkriteria')) {?> form-control is-invalid <?php }?>" value="<?php echo $data_subkriteria['kode_subkriteria']?>" name="kode_subkriteria" required>
                                         <snap class='text-danger'><?php echo $this->session->flashdata('kode_subkriteria'); ?></snap>
                                     </div>

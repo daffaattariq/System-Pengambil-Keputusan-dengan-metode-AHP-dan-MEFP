@@ -91,7 +91,7 @@ class Model_data extends CI_Model
 		$this->db->join('data_kriteria','data_kriteria.id_kriteria=data_subkriteria.id_kriteria');					
 		$query=$this->db->get();			
 		$data= $query->result_array();
-		
+		// print_r($this->db->last_query()); 
 		return $data;
 	}
 	function data_subkriteria_where($where)
@@ -146,6 +146,27 @@ class Model_data extends CI_Model
 		
 		return $data;
 	}
+	function ambil_data_alternatif()
+	{
+		$this->db->select('*');
+		$this->db->from('data_alternatif');					
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		print_r($this->db->last_query()); 
+		return $data;
+	}
+	function data_survei_lapangan_where($where)
+	{
+		$this->db->select('*');
+		$this->db->from('data_survey_lapangan');	
+		// $this->db->join('data_kriteria','data_kriteria.id_kriteria=data_subkriteria.id_kriteria');	
+		$this->db->where($where);				
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		
+		return $data;
+	}
+	
 }
 
 ?>

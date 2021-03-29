@@ -55,15 +55,16 @@
                                 ?>
                                 <tr>
                                     <th scope="row"><?php echo $number?></th>
-                                    <td><?php echo $data_survey_lapangan['kode_longlist'] ?></td>
-                                    <td><?php echo $data_survey_lapangan['nik_longlist'] ?></td>
-                                    <td><?php echo $data_survey_lapangan['nama_alternatif'] ?></td>
-                                    <td><?php echo $data_survey_lapangan['nama_dusun'] ?></td>
-                                    <td><?php echo $data_survey_lapangan['rt'] ?></td>
-                                    <td><?php echo $data_longlist['rw'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['id_alternatif'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c1'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c2'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c3'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c4'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c5'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c6'] ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('c_admin/tampil_edit_data_longlist')?>?id_longlist=<?php echo $data_longlist['id_longlist']?>"><button class="btn btn-dark">update</button></a>
-                                        <a href="<?php echo base_url('c_admin/hapus_data_longlist')?>?id_longlist=<?php echo $data_longlist['id_longlist']?>"><button class="btn btn-danger">delete</button></a>
+                                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-dark">update</button></a>
+                                        <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-danger">delete</button></a>
                                     </td>
                                 </tr>
                                 <?php
