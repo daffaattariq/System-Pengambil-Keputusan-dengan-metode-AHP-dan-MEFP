@@ -44,7 +44,7 @@
                                         <input id="inputText3" type="text" class="form-control" value="<?php echo $data_alternatif['kode_longlist']?>" name="kode_longlist">
                                     </div> -->
                                     <div class="form-group">
-                                        <label for="Nik">NIK</label>
+                                        <label for="NIK">NIK</label>
                                         <input id="nik_alternatif" type="number" value="<?php echo $data_alternatif['nik_alternatif']?>" class="form-control <?php if($this->session->flashdata('nik_alternatif')) {?> form-control is-invalid <?php }?>" name=nik_alternatif required>                                                
                                         <snap class='text-danger'><?php echo $this->session->flashdata('nik_alternatif'); ?></snap>
                                     </div>

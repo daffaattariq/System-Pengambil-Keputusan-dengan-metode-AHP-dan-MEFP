@@ -93,7 +93,6 @@ class C_Admin extends CI_Controller {
 		$where = array(            
             'id_alternatif' =>  $id_alternatif
         );
-
         $data['data_alternatif'] = $this->model_data->pilih_data($where ,'data_alternatif');
         $this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
@@ -148,23 +147,7 @@ class C_Admin extends CI_Controller {
 			$this->form_validation->set_message('check_nik', 'NIK must be unique');
 			$response = false;
 		}
-		// return $response;
-		// if($this->input->post('id_alternatif')){
-		// 	$id_alternatif = $this->input->post('id_alternatif');
-		// }
-		// else{
-		// 	$id_alternatif = '';
-		// 	$result = $this->model_data->check_unique_nik($id_alternatif, $nik_alternatif);
-		// }
-		
-		// if($result == 0){
-		// 	$response = true;
-		// }
-		// else {
-		// 	$this->form_validation->set_message('check_nik', 'NIK must be unique');
-		// 	$response = false;
-		// }
-		// return $response;
+		return $response;
 	}
 
 	//data login
@@ -249,7 +232,7 @@ class C_Admin extends CI_Controller {
             'id_datalogin' =>  $id_datalogin
         );
         // $data['data_login'] = $this->model_data->pilih_data($where ,'data_login');
-		$data['data_login'] = $this->model_data->tampil_data_login($where);
+		$data['data_login'] = $this->model_data->pilih_data($where,'data_login');
         $this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
 		$this->load->view('admin/v_edit_data_login' ,$data);
