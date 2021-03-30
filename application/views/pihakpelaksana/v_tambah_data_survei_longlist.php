@@ -38,19 +38,23 @@
                                 <form action="<?php echo base_url('c_pihakpelaksana/tambah_data_lapangan') ?>" method="post">
                                     <div class="form-group">
                                         <label for="NIK">NIK<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="id_alternatif">
+                                        <select class="form-control <?php if($this->session->flashdata('id_alternatif')) {?> form-control is-invalid <?php }?>" id="exampleFormControlSelect1" name="id_alternatif">
                                         <?php
 
                                             foreach ($data_lapangan_nik as $data_lapangan_nik)
                                             {
                                                 ?>
-                                                <option value="<?php echo $data_lapangan_nik['nik_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?></option>
+                                                <option 
+                                                    
+                                                    value="<?php echo $data_lapangan_nik['nik_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?>
+                                                </option>
                                             
                                         <?php
                                             }
                                         
                                         ?>
                                         </select>
+                                        <snap class='text-danger'><?php echo $this->session->flashdata('id_alternatif'); ?></snap>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputText4" class="col-form-label">C1 - Ibu Hamil<span class="text-danger">*</span></label>
@@ -81,7 +85,7 @@
                                             {
                                                 if($data_lapangan_c2['id_kriteria']==2){
                                                     ?>
-                                                    <option value="<?php echo $data_lapangan_c1['nilai_subkriteria']?>"><?php echo $data_lapangan_c2['nama_subkriteria']?></option>
+                                                    <option value="<?php echo $data_lapangan_c2['nilai_subkriteria']?>"><?php echo $data_lapangan_c2['nama_subkriteria']?></option>
                                                     <?php
                                                 }
                                         ?>
@@ -101,7 +105,7 @@
                                             {
                                                 if($data_lapangan_c3['id_kriteria']==3){
                                                     ?>
-                                                    <option value="<?php echo $data_lapangan_c1['nilai_subkriteria']?>"><?php echo $data_lapangan_c3['nama_subkriteria']?></option>
+                                                    <option value="<?php echo $data_lapangan_c3['nilai_subkriteria']?>"><?php echo $data_lapangan_c3['nama_subkriteria']?></option>
                                                     <?php
                                                 }
                                         ?>
@@ -121,7 +125,7 @@
                                             {
                                                 if($data_lapangan_c4['id_kriteria']==4){
                                                     ?>
-                                                    <option value="<?php echo $data_lapangan_c1['nilai_subkriteria']?>"><?php echo $data_lapangan_c4['nama_subkriteria']?></option>
+                                                    <option value="<?php echo $data_lapangan_c4['nilai_subkriteria']?>"><?php echo $data_lapangan_c4['nama_subkriteria']?></option>
                                                     <?php
                                                 }
                                         ?>
@@ -141,7 +145,7 @@
                                             {
                                                 if($data_lapangan_c5['id_kriteria']==5){
                                                     ?>
-                                                    <option value="<?php echo $data_lapangan_c1['nilai_subkriteria']?>"><?php echo $data_lapangan_c5['nama_subkriteria']?></option>
+                                                    <option value="<?php echo $data_lapangan_c5['nilai_subkriteria']?>"><?php echo $data_lapangan_c5['nama_subkriteria']?></option>
                                                     <?php
                                                 }
                                         ?>

@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>Data Longlist</title> 
+    <link rel="stylesheet" type="text/css" href="../assets/vendor/datatables/css/dataTables.bootstrap4.css">
+    <title>Data Survei Longlist</title>
 </head>
 
 <body>
@@ -29,9 +30,22 @@
                 <div class="card">
                     <h3 class="card-header">DATA SURVEI LONGLIST
                         <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>
+                        
                     </h3>
                     <div class="card-body">
-                        <table class="table table-hover">
+                    <?php
+                        if ($this->session->flashdata('success')){?>
+                        <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <?php echo $this->session->flashdata('success')?>
+                        </div>
+                    <?php
+                        }
+                    ?>
+                                                 
+                        <table class="table table-hover" id="mytable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -54,24 +68,30 @@
                                     
                                 ?>
                                 <tr>
-                                    <th scope="row"><?php echo $number?></th>
+                                <th scope="row"><?php echo $number?></th>
                                     <td><?php echo $data_survey_lapangan['id_alternatif'] ?></td>
                                     <td><?php echo $data_survey_lapangan['c1'] ?></td>
                                     <td><?php echo $data_survey_lapangan['c2'] ?></td>
                                     <td><?php echo $data_survey_lapangan['c3'] ?></td>
                                     <td><?php echo $data_survey_lapangan['c4'] ?></td>
                                     <td><?php echo $data_survey_lapangan['c5'] ?></td>
-                                    <td><?php echo $data_survey_lapangan['c6'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c6'] ?></td>                                 
                                     <td>
-                                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-dark">update</button></a>
-                                        <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-danger">delete</button></a>
+                                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
+                                        <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
                                     </td>
                                 </tr>
                                 <?php
                                     }
-                                ?>   
+                                ?>
+                                
                             </tbody>
                         </table>
+                        <script type="text/javascript"> 
+                            $(document).ready(function() { 
+                                $("#mytable").dataTable(); 
+                            }); 
+                        </script> 
                     </div>
                 </div>
             </div>
@@ -102,6 +122,10 @@
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
+
+    <!-- data table -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
 </body>
  
 </html>

@@ -12,7 +12,7 @@ class Model_data extends CI_Model
 		return $this->db->get()->row();
 	}
 	
-	// cek unique
+	// cek unique - admin
 	// data login
 	function check_unique_username($id_datalogin = '', $username) {
         $this->db->where('username', $username);
@@ -46,8 +46,7 @@ class Model_data extends CI_Model
         return $this->db->get('data_subkriteria')->num_rows();
     }
 
-
-
+	
 	function insert($data,$table)
 	{
 		return $this->db->insert($table,$data);
@@ -114,7 +113,6 @@ class Model_data extends CI_Model
 	}
 	function get_count($table)
 	{
-
 		$query = $this->db->query("SELECT * FROM $table");
 		$data = $query->num_rows();
 		return $data;
@@ -146,6 +144,18 @@ class Model_data extends CI_Model
 		
 		return $data;
 	}
+
+
+	//pihakpelaksana
+	// check unique pihakpelaksana
+	function check_unique_nik_pihak($id_survei_longlist = '', $id_alternatif) {
+        $this->db->where('id_alternatif', $id_alternatif);
+        if($id_survei_longlist) {
+            $this->db->where_not_in('id_survei_longlist', $id_survei_longlist);
+        }
+        return $this->db->get('data_survey_lapangan')->num_rows();
+    }
+
 	function ambil_data_alternatif()
 	{
 		$this->db->select('*');
@@ -159,11 +169,9 @@ class Model_data extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('data_survey_lapangan');	
-		// $this->db->join('data_kriteria','data_kriteria.id_kriteria=data_subkriteria.id_kriteria');	
 		$this->db->where($where);				
 		$query=$this->db->get();			
 		$data= $query->result_array();
-		
 		return $data;
 	}
 	

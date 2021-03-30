@@ -5,6 +5,7 @@ class C_Pihakpelaksana extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		$this->load->library('form_validation');
 		if(!$this->session->userdata('level'))
 		{
 			redirect('login');
@@ -19,22 +20,17 @@ class C_Pihakpelaksana extends CI_Controller {
 		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
-		
 		$this->load->view('pihakpelaksana/v_dashboard_pihakpelaksana',$data);
-		
 	}
-	
-	
+		
 	//data lapangan
 	public function data_survey_lapangan()
 	{
-		
 		$data['data_survey_lapangan'] = $this->model_data->data('id_alternatif','data_survey_lapangan');
 
 		// print($data['data_longlist'][0]['kode_longlist']);die();
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
-		
 		$this->load->view('pihakpelaksana/v_data_survei_longlist' ,$data);
 
 	}
@@ -48,37 +44,48 @@ class C_Pihakpelaksana extends CI_Controller {
 		$ambil_data['data_lapangan_c4']= $this->model_data->data_subkriteria();
 		$ambil_data['data_lapangan_c5']= $this->model_data->data_subkriteria();
 		$ambil_data['data_lapangan_c6']= $this->model_data->data_subkriteria();
+		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
-		
 		$this->load->view('pihakpelaksana/v_tambah_data_survei_longlist',$ambil_data );		
 	}
 
 	public function tambah_data_lapangan()
 	{
-		$id_alternatif = $this->input->post('id_alternatif');
-		$c1 = $this->input->post('c1');
-		$c2 = $this->input->post('c2');
-		$c3 = $this->input->post('c3');
-		$c4 = $this->input->post('c4');
-		$c5 = $this->input->post('c5');
-		$c6 = $this->input->post('c6');
+		$this->form_validation->set_rules('id_alternatif', 'NIK', 'is_unique[data_survey_lapangan.id_alternatif]|required');
+
+		if($this->form_validation->run() == false )
+		{
+			$this->session->set_flashdata('id_alternatif', form_error('id_alternatif'));
+			redirect('c_pihakpelaksana/tampil_tambah_data_lapangan');	
+		}
+		else
+		{
+			$id_alternatif = $this->input->post('id_alternatif',true);
+			$c1 = $this->input->post('c1',true);
+			$c2 = $this->input->post('c2',true);
+			$c3 = $this->input->post('c3',true);
+			$c4 = $this->input->post('c4',true);
+			$c5 = $this->input->post('c5',true);
+			$c6 = $this->input->post('c6',true);
 
 
-		$data_insert = array(
-            'id_alternatif'  => $id_alternatif,
-            'c1'  => $c1,
-			'c2'  => $c2,
-			'c3'  => $c3,
-			'c4'  => $c4,
-			'c5'  => $c5,
-			'c6'  => $c6
-        );
+			$data_insert = array(
+				'id_alternatif'  => $id_alternatif,
+				'c1'  => $c1,
+				'c2'  => $c2,
+				'c3'  => $c3,
+				'c4'  => $c4,
+				'c5'  => $c5,
+				'c6'  => $c6
+			);
+			// print($c1);die();
+			$this->model_data->insert($data_insert,'data_survey_lapangan');
 
-        // print($c1);die();
-        $this->model_data->insert($data_insert,'data_survey_lapangan');
+			redirect('c_pihakpelaksana/data_survey_lapangan');
+		}
 
-		redirect('c_pihakpelaksana/data_survey_lapangan');		
+				
 	}
 
 	
@@ -107,32 +114,55 @@ class C_Pihakpelaksana extends CI_Controller {
 
 	public function edit_data_lapangan()
 	{
-		$id_survei_longlist = $this->input->post('id_survei_longlist');
-		$id_alternatif = $this->input->post('id_alternatif');
-		$c1 = $this->input->post('c1');
-		$c2 = $this->input->post('c2');
-		$c3 = $this->input->post('c3');
-		$c4 = $this->input->post('c4');
-		$c5 = $this->input->post('c5');
-		$c6 = $this->input->post('c6');
+		$id_survei_longlist_get = $this->input->get('id_survei_longlist');
+		$this->form_validation->set_rules('id_alternatif', 'NIK', 'callback_check_nik|required');
+		if($this->form_validation->run() == false )
+		{
+			$this->session->set_flashdata('id_alternatif', form_error('id_alternatif'));
+			redirect('c_admin/tampil_edit_data_lapangan?id_survei_longlist='.$id_survei_longlist_get.'');	
+		}
+		else{
+			$id_survei_longlist = $this->input->post('id_survei_longlist',true);
+			$id_alternatif = $this->input->post('id_alternatif',true);
+			$c1 = $this->input->post('c1',true);
+			$c2 = $this->input->post('c2',true);
+			$c3 = $this->input->post('c3',true);
+			$c4 = $this->input->post('c4',true);
+			$c5 = $this->input->post('c5',true);
+			$c6 = $this->input->post('c6',true);
 
+			$where = array(
+				'id_survei_longlist' => $id_survei_longlist
+			);
 
-        $where = array(
-            'id_survei_longlist' => $id_survei_longlist
-        );
-
-        $data = array(
-            'id_alternatif'  => $id_alternatif,
-            'c1'  => $c1,
-			'c2'  => $c2,
-			'c3'  => $c3,
-			'c4'  => $c4,
-			'c5'  => $c5,
-			'c6'  => $c6
-        );
-        $this->model_data->edit_data($where,$data,'data_survey_lapangan');
-        
-        redirect('c_pihakpelaksana/data_survey_lapangan');		
+			$data = array(
+				'id_alternatif'  => $id_alternatif,
+				'c1'  => $c1,
+				'c2'  => $c2,
+				'c3'  => $c3,
+				'c4'  => $c4,
+				'c5'  => $c5,
+				'c6'  => $c6
+			);
+			$this->model_data->edit_data($where,$data,'data_survey_lapangan');
+			$this->session->set_flashdata('success','Berhasil Mengedit Data ');
+			redirect('c_pihakpelaksana/data_survey_lapangan');
+		}
+				
+	}
+	function check_nik($id_alternatif) {        
+		if($this->input->post('id_survei_longlist'))
+			$id_survei_longlist = $this->input->post('id_survei_longlist');
+		else
+			$id_survei_longlist = '';
+			$result = $this->model_data->check_unique_nik_pihak($id_survei_longlist, $id_alternatif);
+		if($result == 0)
+			$response = true;
+		else {
+			$this->form_validation->set_message('check_nik', 'NIK must be unique');
+			$response = false;
+		}
+		return $response;
 	}
 
 	public function hapus_data_lapangan()
