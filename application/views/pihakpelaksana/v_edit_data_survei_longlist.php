@@ -162,8 +162,8 @@
                                         <?php
                                             }
                                         
-                                        ?>
-                                        </select>
+                                        ?>   
+                                        </select> 
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">C6 - Kondisi Fisik Rumah<span class="text-danger">*</span></label>

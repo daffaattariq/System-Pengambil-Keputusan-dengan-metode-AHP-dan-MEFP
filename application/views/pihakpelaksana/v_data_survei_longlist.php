@@ -43,7 +43,7 @@
                         </div>
                     <?php
                         }
-                    ?>
+                    ?>  
                                                  
                         <table class="table table-hover" id="mytable">
                             <thead>

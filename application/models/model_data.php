@@ -173,7 +173,7 @@ class Model_data extends CI_Model
 		$query=$this->db->get();			
 		$data= $query->result_array();
 		return $data;
-	}
+	}    
 	
 }
 

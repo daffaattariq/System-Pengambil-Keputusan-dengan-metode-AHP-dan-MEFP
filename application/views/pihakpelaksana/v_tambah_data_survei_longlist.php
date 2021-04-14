@@ -139,7 +139,7 @@
                                     <div class="form-group">
                                         <label for="inputEmail">C5 - Kelayakan Sanitasi<span class="text-danger">*</span></label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="c5">
-                                        <?php
+                                        <?php 
 
                                             foreach ($data_lapangan_c5 as $data_lapangan_c5)
                                             {

@@ -213,7 +213,7 @@ class C_Pihakpelaksana extends CI_Controller {
 		$this->load->view('pihakpelaksana/v_data_subkriteria_pihakpelaksana' ,$data);
 
 	}
-
+  
 	//INFO DATA DIRI
 	public function data_info(){
 		$username = $this->session->userdata('username');
