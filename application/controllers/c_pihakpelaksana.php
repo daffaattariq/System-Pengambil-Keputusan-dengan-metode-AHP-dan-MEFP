@@ -83,9 +83,7 @@ class C_Pihakpelaksana extends CI_Controller {
 			$this->model_data->insert($data_insert,'data_survey_lapangan');
 
 			redirect('c_pihakpelaksana/data_survey_lapangan');
-		}
-
-				
+		}			
 	}
 
 	

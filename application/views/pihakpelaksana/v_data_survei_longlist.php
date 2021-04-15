@@ -50,12 +50,12 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">NIK Alternatif</th>
-                                    <th scope="col">C1</th>
-                                    <th scope="col">C2</th>
-                                    <th scope="col">C3</th>
-                                    <th scope="col">C4</th>
-                                    <th scope="col">C5</th>
-                                    <th scope="col">C6</th>
+                                    <th scope="col">Ibu Hamil</th>
+                                    <th scope="col">Batita <= 3 Tahun</th>
+                                    <th scope="col">Stunting</th>
+                                    <th scope="col">Disabilitas</th>
+                                    <th scope="col">Kelayakan Sanitasi</th>
+                                    <th scope="col">Kondisi Fisik Rumah</th>
                                     <th scope="col">AKSI</th>
                                 </tr>
                             </thead>

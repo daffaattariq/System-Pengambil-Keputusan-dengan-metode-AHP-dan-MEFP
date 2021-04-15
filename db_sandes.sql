@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2021 at 05:28 AM
+-- Generation Time: Apr 15, 2021 at 10:29 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -92,7 +92,7 @@ CREATE TABLE `data_login` (
 --
 
 INSERT INTO `data_login` (`id_datalogin`, `nama`, `divisi`, `no_telepon`, `username`, `password`, `level`) VALUES
-(17, 'User1', 'TFL', '081098765432', 'User1', 'user1', 'Pihak Pelaksana'),
+(17, 'User1', 'TFL', '081098765432', 'User1', 'user', 'Pihak Pelaksana'),
 (22, 'Admin1', 'Staff IT', '081123456789', 'Admin1', 'admin1', 'Admin');
 
 -- --------------------------------------------------------
@@ -121,7 +121,12 @@ INSERT INTO `data_subkriteria` (`id_subkriteria`, `id_kriteria`, `kode_subkriter
 (10, 2, 'K21', '0 (Batita)', 1),
 (11, 2, 'K22', 'Batita (2 s/d <= 3 Tahun)', 2),
 (12, 2, 'K23', 'Batita (1 s/d <= 2 Tahun)', 3),
-(14, 2, 'K24', 'Batita (0 s/d <= 1 Tahun)', 4);
+(14, 2, 'K24', 'Batita (0 s/d <= 1 Tahun)', 4),
+(15, 3, '12', 'q', 1),
+(16, 4, '1213', 'qwert', 2),
+(17, 5, '1234', 'q', 1),
+(18, 5, '14', 'qw', 1),
+(19, 11, 'sd', '123', 4);
 
 -- --------------------------------------------------------
 
@@ -131,15 +136,23 @@ INSERT INTO `data_subkriteria` (`id_subkriteria`, `id_kriteria`, `kode_subkriter
 
 CREATE TABLE `data_survey_lapangan` (
   `id_survei_longlist` int(11) NOT NULL,
-  `id_alternatif` int(11) NOT NULL,
-  `id_subkriteria` int(11) NOT NULL,
-  `C1` int(11) NOT NULL,
-  `C2` int(11) NOT NULL,
-  `C3` int(11) NOT NULL,
-  `C4` int(11) NOT NULL,
-  `C5` int(11) NOT NULL,
-  `C6` int(11) NOT NULL
+  `id_alternatif` bigint(11) NOT NULL,
+  `c1` int(11) NOT NULL,
+  `c2` int(11) NOT NULL,
+  `c3` int(11) NOT NULL,
+  `c4` int(11) NOT NULL,
+  `c5` int(11) NOT NULL,
+  `c6` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `data_survey_lapangan`
+--
+
+INSERT INTO `data_survey_lapangan` (`id_survei_longlist`, `id_alternatif`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`) VALUES
+(8, 3507241211790007, 4, 1, 1, 2, 1, 4),
+(9, 3507241108850010, 1, 3, 1, 2, 1, 4),
+(10, 3507241509400001, 2, 2, 1, 2, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -187,8 +200,7 @@ ALTER TABLE `data_subkriteria`
 --
 ALTER TABLE `data_survey_lapangan`
   ADD PRIMARY KEY (`id_survei_longlist`),
-  ADD KEY `id_longlist` (`id_alternatif`),
-  ADD KEY `id_subkriteria` (`id_subkriteria`);
+  ADD KEY `id_longlist` (`id_alternatif`);
 
 --
 -- Indexes for table `pembobotan`
@@ -205,31 +217,31 @@ ALTER TABLE `pembobotan`
 -- AUTO_INCREMENT for table `data_alternatif`
 --
 ALTER TABLE `data_alternatif`
-  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `data_kriteria`
 --
 ALTER TABLE `data_kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `data_login`
 --
 ALTER TABLE `data_login`
-  MODIFY `id_datalogin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_datalogin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `data_subkriteria`
 --
 ALTER TABLE `data_subkriteria`
-  MODIFY `id_subkriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_subkriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `data_survey_lapangan`
 --
 ALTER TABLE `data_survey_lapangan`
-  MODIFY `id_survei_longlist` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_survei_longlist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pembobotan`
@@ -246,13 +258,6 @@ ALTER TABLE `pembobotan`
 --
 ALTER TABLE `data_subkriteria`
   ADD CONSTRAINT `data_subkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `data_kriteria` (`id_kriteria`);
-
---
--- Constraints for table `data_survey_lapangan`
---
-ALTER TABLE `data_survey_lapangan`
-  ADD CONSTRAINT `data_survey_lapangan_ibfk_2` FOREIGN KEY (`id_alternatif`) REFERENCES `data_alternatif` (`id_alternatif`),
-  ADD CONSTRAINT `data_survey_lapangan_ibfk_3` FOREIGN KEY (`id_subkriteria`) REFERENCES `data_subkriteria` (`id_subkriteria`);
 
 --
 -- Constraints for table `pembobotan`

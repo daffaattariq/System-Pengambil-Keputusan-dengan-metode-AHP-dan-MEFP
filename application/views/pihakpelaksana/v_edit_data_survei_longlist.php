@@ -42,9 +42,9 @@
                                     <div class="form-group">
                                         <input id="inputText3" type="text" class="form-control" value="<?php echo $data_survey_lapangan['id_survei_longlist']?>" name="id_survei_longlist" hidden>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <label for="NIK">NIK<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="id_alternatif">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="id_alternatif" >
                                             <option selected="selected" value="<?php echo $data_survey_lapangan['id_alternatif']?>"><?php echo $data_survey_lapangan['id_alternatif']?></option>
                                             <?php
 

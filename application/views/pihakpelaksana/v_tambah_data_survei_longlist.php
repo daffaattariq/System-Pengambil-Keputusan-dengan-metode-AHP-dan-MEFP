@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/select2.css">
+    
+
     <title>Tambah Data Alternatif</title>
 </head>
 
@@ -38,7 +41,8 @@
                                 <form action="<?php echo base_url('c_pihakpelaksana/tambah_data_lapangan') ?>" method="post">
                                     <div class="form-group">
                                         <label for="NIK">NIK<span class="text-danger">*</span></label>
-                                        <select class="form-control <?php if($this->session->flashdata('id_alternatif')) {?> form-control is-invalid <?php }?>" id="exampleFormControlSelect1" name="id_alternatif">
+                                        
+                                        <select class="form-control select2bs4 <?php if($this->session->flashdata('id_alternatif')) {?> form-control is-invalid <?php }?>" id="exampleFormControlSelect1" name="id_alternatif">
                                         <?php
 
                                             foreach ($data_lapangan_nik as $data_lapangan_nik)
@@ -54,6 +58,7 @@
                                         
                                         ?>
                                         </select>
+			
                                         <snap class='text-danger'><?php echo $this->session->flashdata('id_alternatif'); ?></snap>
                                     </div>
                                     <div class="form-group">
@@ -211,6 +216,15 @@
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="<?php echo base_url();?>assets/css/select2.full.min.js"></script>
+
+    <script>
+        $(function (){
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+        })
+    </script>
 </body>
  
 </html>
