@@ -174,7 +174,17 @@ class Model_data extends CI_Model
 		$data= $query->result_array();
 		return $data;
 	}    
-	
+
+	function data_lapangan()
+	{
+		$this->db->select('*');
+		$this->db->from('data_lapangan');	
+		$this->db->join('data_alternatif','data_alternatif.id_alternatif=data_lapangan.id_alternatif');					
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		// print_r($this->db->last_query()); 
+		return $data;
+	}
 }
 
 ?>

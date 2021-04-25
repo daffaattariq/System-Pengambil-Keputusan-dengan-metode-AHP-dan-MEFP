@@ -48,30 +48,41 @@
                         <table class="table table-hover" id="mytable">
                             <thead>
                                 <tr>
-                                    <th rowspan='2'>#</th>
-                                    <th rowspan='2'>NIK Alternatif</th>
-                                    <!-- <th colspan='<?php echo $total_kriteria;?>'></th> -->
-                                </tr>
-                                <tr>
-                                  <?php
-                                  foreach($kriteria as $k)
-                                    echo "<th>$k[nama_kriteria]</th>\n";
-                                  ?>
+                                    <th scope="col">#</th>
+                                    <th scope="col">NIK Alternatif</th>
+                                    <th scope="col">Ibu Hamil</th>
+                                    <th scope="col">Batita <= 3 Tahun</th>
+                                    <th scope="col">Stunting</th>
+                                    <th scope="col">Disabilitas</th>
+                                    <th scope="col">Kelayakan Sanitasi</th>
+                                    <th scope="col">Kondisi Fisik Rumah</th>
+                                    <th scope="col">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-                                $i=0;
-                                foreach($data_kriteria as $nama=>$krit){
-                                  echo "<tr>
-                                    <td>".(++$i)."</td>
-                                    <td>$nama</td>";
-                                  foreach($kriteria as $k){
-                                    $nama_kriteria = $k['nama_kriteria'];
-                                    echo "<td align='center'>$krit[$nama_kriteria]</td>";
-                                  }
-                                  echo "</tr>\n";
-                                }
+                                <?php
+                                    $number = 0;
+                                    foreach($data_survey_lapangan as $data_survey_lapangan)
+                                    {
+                                        $number ++;
+                                    
+                                ?>
+                                <tr>
+                                <th scope="row"><?php echo $number?></th>
+                                    <td><?php echo $data_survey_lapangan['id_alternatif'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c1'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c2'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c3'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c4'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c5'] ?></td>
+                                    <td><?php echo $data_survey_lapangan['c6'] ?></td>                                 
+                                    <td>
+                                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
+                                        <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?id_survei_longlist=<?php echo $data_survey_lapangan['id_survei_longlist']?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
+                                    </td>
+                                </tr>
+                                <?php
+                                    }
                                 ?>
                                 
                             </tbody>

@@ -26,7 +26,34 @@ class C_Pihakpelaksana extends CI_Controller {
 	//data lapangan
 	public function data_survey_lapangan()
 	{
-		$data['data_survey_lapangan'] = $this->model_data->data('id_alternatif','data_survey_lapangan');
+		// $data['data_survey_lapangan'] = $this->model_data->data('id_alternatif','data_survey_lapangan');
+
+		// // print($data['data_longlist'][0]['kode_longlist']);die();
+		// $this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
+		// $this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
+		// $this->load->view('pihakpelaksana/v_data_survei_longlist' ,$data);
+
+		$kriteria = $this->db->query("SELECT * FROM data_kriteria")->result_array();
+		
+		$tampil = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, d.nama_kriteria
+        FROM
+          data_lapangan a
+          JOIN
+            data_alternatif b ON a.id_alternatif = b.id_alternatif
+          JOIN
+						data_subkriteria c ON a.id_subkriteria = c.id_subkriteria
+					JOIN 
+						data_kriteria d ON c.id_kriteria = d.id_kriteria");
+
+		$row= $tampil->result_array();
+		foreach($row as $row){
+			$data_kriteria[$row['nama_alternatif']][$row['nama_kriteria']]=$row['nilai_subkriteria'];
+			$kriterias[]=$row['nama_kriteria'];
+		}
+		// print_r($data);
+		$data['total_kriteria']= count($kriteria);
+		$data['kriteria']= $kriteria;
+		$data['data_kriteria']= $data_kriteria;
 
 		// print($data['data_longlist'][0]['kode_longlist']);die();
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
