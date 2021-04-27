@@ -50,7 +50,7 @@
                                                 ?>
                                                 <option 
                                                     
-                                                    value="<?php echo $data_lapangan_nik['nik_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?>
+                                                    value="<?php echo $data_lapangan_nik['id_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?>
                                                 </option>
                                             
                                         <?php
@@ -61,134 +61,38 @@
 			
                                         <snap class='text-danger'><?php echo $this->session->flashdata('id_alternatif'); ?></snap>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputText4" class="col-form-label">C1 - Ibu Hamil<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c1">
-                                        <?php
+                                    
 
-                                            foreach ($data_lapangan_c1 as $data_lapangan_c1)
-                                            {
-                                                if($data_lapangan_c1['id_kriteria']==1){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c1['nilai_subkriteria']?>"><?php echo $data_lapangan_c1['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
                                     <div class="form-group">
-                                        <label for="inputEmail">C2-Batita <= 3 Tahun<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c2">
-                                        <?php
-
-                                            foreach ($data_lapangan_c2 as $data_lapangan_c2)
-                                            {
-                                                if($data_lapangan_c2['id_kriteria']==2){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c2['nilai_subkriteria']?>"><?php echo $data_lapangan_c2['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
+                                    <?php
+                                        foreach ($data_kriteria as $no => $data_kriteria)
+                                        {
+                                            ?><label class="col-form-label">C<?php echo $no+1?> - <?php echo $data_kriteria['nama_kriteria']?><span class="text-danger">*</span></label>
                                             
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C3 - Stunting<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c3">
-                                        <?php
-
-                                            foreach ($data_lapangan_c3 as $data_lapangan_c3)
-                                            {
-                                                if($data_lapangan_c3['id_kriteria']==3){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c3['nilai_subkriteria']?>"><?php echo $data_lapangan_c3['nama_subkriteria']?></option>
-                                                    <?php
+                                            <select class="form-control" id="exampleFormControlSelect1" name="c<?php echo $no+1?>">
+                                            <?php
+                                                foreach ($data_lapangan1 as $data_lapangan)
+                                                {
+                                                    if($data_lapangan['id_kriteria']== $data_kriteria['id_kriteria']){
+                                                        ?>
+                                                        <option value="<?php echo $data_lapangan['id_subkriteria']?>"><?php echo $data_lapangan['nama_subkriteria']?></option>
+                                                        <?php
+                                                    }
                                                 }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
+                                            ?>
+                                            </select>
+                                            <?php
+                                        }
+                                    ?>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C4 - Disabilitas<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c4">
-                                        <?php
-
-                                            foreach ($data_lapangan_c4 as $data_lapangan_c4)
-                                            {
-                                                if($data_lapangan_c4['id_kriteria']==4){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c4['nilai_subkriteria']?>"><?php echo $data_lapangan_c4['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C5 - Kelayakan Sanitasi<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c5">
-                                        <?php 
-
-                                            foreach ($data_lapangan_c5 as $data_lapangan_c5)
-                                            {
-                                                if($data_lapangan_c5['id_kriteria']==5){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c5['nilai_subkriteria']?>"><?php echo $data_lapangan_c5['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C6 - Kondisi Fisik Rumah<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c6">
-                                        <?php
-
-                                            foreach ($data_lapangan_c6 as $data_lapangan_c6)
-                                            {
-                                                if($data_lapangan_c6['id_kriteria']==11){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c6['nilai_subkriteria']?>"><?php echo $data_lapangan_c6['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
+                                    
                                     <button class="btn btn-primary btn-sm float-left mr-6" type="submit"><i class="fas fa-plus" ></i> Tambah Data</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                        <!-- ============================================================== -->
-                        <!-- end basic form  -->    
+                  <!-- end basic form  -->    
             </div>
         </div>
     </div>

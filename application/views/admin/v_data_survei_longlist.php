@@ -29,7 +29,7 @@
                 <!-- CONTENTTTTT -->
                 <div class="card">
                     <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
-                        <!-- <a href="<?php echo base_url('c_admin/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
+                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>
                         
                     </h3>
                     <div class="card-body">
@@ -51,7 +51,6 @@
                                     <th rowspan='2' style="vertical-align:middle">#</th>
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
-                                    <th rowspan='2' style="vertical-align:middle">Aksi</th>
                                 </tr>
                                 <tr>
                                   <?php
@@ -73,10 +72,7 @@
                                     echo "<td align='center'>$krit[$id_kriteria]</td>";
                                   }
                             ?>
-                                  <td>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
-                                  </td>
+                                  
                             <?php
                                 }
                             ?>

@@ -63,8 +63,21 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-check"></i>AHP <span class="badge badge-success">6</span></a>
+                            <div id="submenu-2" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo base_url('c_admin/data_kriteria') ?>">Analisa Kriteria</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?php echo base_url('c_admin/data_subkriteria') ?>">Perhitungan AHP</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link " href=""><i class="fa fa-fw fa-user-circle"></i>Data Lapangan</a>
+                            <a class="nav-link " href="<?php echo base_url('c_admin/data_survey_lapangan') ?>"><i class="fa fa-fw fa-user-circle"></i>Analisa Data Survei</a>
                         </li>  
                         <li class="nav-item">
                             <a class="nav-link " href=""><i class="fa fa-fw fa-eye"></i>Hasil Laporan</a>

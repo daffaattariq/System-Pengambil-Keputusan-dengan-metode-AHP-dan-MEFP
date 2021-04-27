@@ -581,5 +581,40 @@ class C_Admin extends CI_Controller {
 		}
 		return $response;
 	}
+
+	public function data_survey_lapangan()
+	{
+		//data_paten
+		// $data['data_survey_lapangan'] = $this->model_data->data('id_alternatif','data_survey_lapangan');
+		// // print($data['data_longlist'][0]['kode_longlist']);die();
+		// $this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
+		// $this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
+		// $this->load->view('pihakpelaksana/v_data_survei_longlist' ,$data);
+		
+		//data tidak paten
+		$kriteria = $this->db->query("SELECT * FROM data_kriteria")->result_array();
+		
+		$tampil = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
+        FROM
+        	data_lapangan a
+        JOIN
+            data_alternatif b ON a.id_alternatif = b.id_alternatif
+        JOIN
+			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria");
+
+		$row= $tampil->result_array();
+		foreach($row as $row){
+			$data_kriteria[$row['nik_alternatif']][$row['id_kriteria']]=$row['nama_subkriteria'];
+		}
+		// print_r($data);
+		$data['total_kriteria']= count($kriteria);
+		$data['kriteria']= $kriteria;
+		$data['data_kriteria']= $data_kriteria;
+
+		// print($data['data_longlist'][0]['kode_longlist']);die();
+		$this->load->view('admin/v_side_bar');
+		$this->load->view('admin/v_navbar');
+		$this->load->view('admin/v_data_survei_longlist' ,$data);
+	}
 }
 ?>

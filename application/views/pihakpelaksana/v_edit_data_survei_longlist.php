@@ -35,160 +35,55 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <?php foreach($data_survey_lapangan as $data_survey_lapangan)
-                                    {
+                                <?php foreach($data_alternatif as $data_alternatif){
+                                    echo("<h4>".$data_alternatif['nik_alternatif']);
+                                    echo(" - ");
+                                    echo($data_alternatif['nama_alternatif']."</h4>");
+                                }
                                 ?>
-                                <form action="<?php echo base_url('c_pihakpelaksana/edit_data_lapangan') ?>" method="post">
-                                    <div class="form-group">
-                                        <input id="inputText3" type="text" class="form-control" value="<?php echo $data_survey_lapangan['id_survei_longlist']?>" name="id_survei_longlist" hidden>
-                                    </div>
-                                    <div class="form-group" >
-                                        <label for="NIK">NIK<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="id_alternatif" >
-                                            <option selected="selected" value="<?php echo $data_survey_lapangan['id_alternatif']?>"><?php echo $data_survey_lapangan['id_alternatif']?></option>
-                                            <?php
-
-                                            foreach ($data_lapangan_nik as $data_lapangan_nik)
-                                            {
-                                                if($data_survey_lapangan['id_alternatif'] != $data_lapangan_nik['nik_alternatif'])
-                                                {
-
-                                                
-                                                ?>
-                                                <option value="<?php echo $data_lapangan_nik['nik_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?></option>
-                                            
-                                            <?php
-                                                }
-                                            }
-                                            
-                                            ?>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputText4" class="col-form-label">C1 - Ibu Hamil<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c1">
-                                        <?php
-
-                                            foreach ($data_lapangan_c1 as $data_lapangan_c1)
-                                            {
-                                                if($data_lapangan_c1['id_kriteria']==1){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c1['nilai_subkriteria']?>"><?php echo $data_lapangan_c1['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C2-Batita <= 3 Tahun<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c2">
-                                        <?php
-
-                                            foreach ($data_lapangan_c2 as $data_lapangan_c2)
-                                            {
-                                                if($data_lapangan_c2['id_kriteria']==2){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c2['nilai_subkriteria']?>"><?php echo $data_lapangan_c2['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C3 - Stunting<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c3">
-                                        <?php
-
-                                            foreach ($data_lapangan_c3 as $data_lapangan_c3)
-                                            {
-                                                if($data_lapangan_c3['id_kriteria']==3){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c3['nilai_subkriteria']?>"><?php echo $data_lapangan_c3['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C4 - Disabilitas<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c4">
-                                        <?php
-
-                                            foreach ($data_lapangan_c4 as $data_lapangan_c4)
-                                            {
-                                                if($data_lapangan_c4['id_kriteria']==4){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c4['nilai_subkriteria']?>"><?php echo $data_lapangan_c4['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C5 - Kelayakan Sanitasi<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c5">
-                                        <?php
-
-                                            foreach ($data_lapangan_c5 as $data_lapangan_c5)
-                                            {
-                                                if($data_lapangan_c5['id_kriteria']==5){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c5['nilai_subkriteria']?>"><?php echo $data_lapangan_c5['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>   
-                                        </select> 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail">C6 - Kondisi Fisik Rumah<span class="text-danger">*</span></label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="c6">
-                                        <?php
-
-                                            foreach ($data_lapangan_c6 as $data_lapangan_c6)
-                                            {
-                                                if($data_lapangan_c6['id_kriteria']==11){
-                                                    ?>
-                                                    <option value="<?php echo $data_lapangan_c6['nilai_subkriteria']?>"><?php echo $data_lapangan_c6['nama_subkriteria']?></option>
-                                                    <?php
-                                                }
-                                        ?>
-                                            
-                                        <?php
-                                            }
-                                        
-                                        ?>
-                                        </select>
-                                    </div>
+                                <form action="<?php echo base_url('c_pihakpelaksana/edit_data_lapangan') ?>?id_alternatif=<?php echo $ambil_id_alternatif?>" method="post">
+                                <div class="form-group">  
+                            <?php
+                                // print_r($data_kriteria[26]);
+                                foreach($data_kriteria as $nik=>$krit){
+                                //   echo "<tr>
+                                    
+                                //     <br><td>$nik </td>";
+                                    
+                                    ?>
+                                    <!-- <input type="text" class="form-control" value="<?php echo $nik?>" name="id_alternatif>" > -->
                                     <?php
-                                            }
-                                        
-                                        ?>
+
+                                    // print_r($krit);
+                                    $no=0;
+                                  foreach($kriteria as $k){
+                                      $nama_kriteria = $k['nama_kriteria'];
+                                    ?>
+                                    
+                                    <input id="inputText3" type="text" class="form-control" value="<?php echo $data_kriteria[$nik][$nama_kriteria]?>" name="id_dsl<?php echo $no+1?>" hidden>
+                                    <label class="col-form-label">C<?php echo $no+1?> - <?php echo $nama_kriteria?><span class="text-danger">*</span></label><br>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="c<?php echo $no+1?>">
+                                            <?php
+                                                foreach ($data_lapangan1 as $data_lapangan)
+                                                {
+                                                    if($data_lapangan['id_kriteria']== $k['id_kriteria']){
+                                                        ?>
+                                                        <option  value="<?php echo $data_lapangan['id_subkriteria']?>"selected>
+                                                        <?php echo $data_lapangan['nama_subkriteria']?>
+                                                        
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            </select>
+                                    <?php
+                                    $no++;
+                                    // print($nama_kriteria. "<br>");
+                                    // echo "<td align='center'>$krit[$nama_kriteria]</td>";
+                                  }
+                                }
+                            ?>
+                            </div>
                                     <button class="btn btn-primary btn-sm float-left mr-6" type="submit"><i class="fas fa-plus" ></i> Tambah Data</button>
                                 </form>
                             </div>
