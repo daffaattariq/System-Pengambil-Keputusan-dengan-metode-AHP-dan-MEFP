@@ -605,16 +605,18 @@ class C_Admin extends CI_Controller {
 		$row= $tampil->result_array();
 		foreach($row as $row){
 			$data_kriteria[$row['nik_alternatif']][$row['id_kriteria']]=$row['nama_subkriteria'];
+			$data_kriteria_nilai[$row['nik_alternatif']][$row['id_kriteria']]=$row['nilai_subkriteria'];
 		}
 		// print_r($data);
 		$data['total_kriteria']= count($kriteria);
 		$data['kriteria']= $kriteria;
 		$data['data_kriteria']= $data_kriteria;
+		$data['data_kriteria_nilai']=$data_kriteria_nilai;
 
 		// print($data['data_longlist'][0]['kode_longlist']);die();
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
-		$this->load->view('admin/v_data_survei_longlist' ,$data);
+		$this->load->view('admin/v_data_survei_longlist_admin' ,$data);
 	}
 }
 ?>

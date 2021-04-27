@@ -29,7 +29,7 @@
                             <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana') ?>">Dashboard</a> 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_survey_lapangan') ?>"><i class="fab fa-fw fa-readme"></i>Analisa Data Survei</a>
+                            <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_survey_lapangan') ?>"><i class="fab fa-fw fa-readme"></i>Data Survei Longlist</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href=""><i class="fas fa-fw fa-check"></i>Perhitungan MFEP</a>

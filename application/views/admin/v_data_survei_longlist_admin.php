@@ -28,8 +28,8 @@
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <div class="card">
-                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
-                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>
+                    <h3 class="card-header">DATA SURVEI LONGLIST
+                        <!-- <a href="<?php echo base_url('c_admin/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
                         
                     </h3>
                     <div class="card-body">
@@ -51,6 +51,7 @@
                                     <th rowspan='2' style="vertical-align:middle">#</th>
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
+                                    
                                 </tr>
                                 <tr>
                                   <?php
@@ -82,6 +83,66 @@
                         <script type="text/javascript"> 
                             $(document).ready(function() { 
                                 $("#mytable").dataTable(); 
+                            }); 
+                        </script> 
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
+                        <!-- <a href="<?php echo base_url('c_admin/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
+                        
+                    </h3>
+                    <div class="card-body">
+                    <?php
+                        if ($this->session->flashdata('success')){?>
+                        <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <?php echo $this->session->flashdata('success')?>
+                        </div>
+                    <?php
+                        }
+                    ?>  
+                                                 
+                        <table class="table table-hover" id="mytable_nilai">
+                            <thead>
+                                <tr>
+                                    <th rowspan='2' style="vertical-align:middle">#</th>
+                                    <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
+                                    <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
+                                    
+                                </tr>
+                                <tr>
+                                  <?php
+                                  foreach($kriteria as $k)
+                                    echo "<th>$k[nama_kriteria]</th>\n";
+                                  ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                $i=0;
+                                foreach($data_kriteria_nilai as $nik=>$krit){
+                                  echo "<tr>
+                                    <td>".(++$i).".</td>
+                                    <td>$nik</td>";
+
+                                  foreach($kriteria as $k){
+                                    $id_kriteria = $k['id_kriteria'];
+                                    echo "<td align='center'>$krit[$id_kriteria]</td>";
+                                  }
+                            ?>
+                                  
+                            <?php
+                                }
+                            ?>
+                                
+                            </tbody>
+                        </table>
+                        <script type="text/javascript"> 
+                            $(document).ready(function() { 
+                                $("#mytable_nilai").dataTable(); 
                             }); 
                         </script> 
                     </div>
