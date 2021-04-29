@@ -73,8 +73,8 @@
                                     echo "<td align='center'>$krit[$id_kriteria]</td>";
                                   }
                             ?>
-                                  <td>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
+                                  <td class="btn-group">
+                                      <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button  class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
                                       <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
                                   </td>
                             <?php

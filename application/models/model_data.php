@@ -162,7 +162,7 @@ class Model_data extends CI_Model
 		$this->db->from('data_alternatif');					
 		$query=$this->db->get();			
 		$data= $query->result_array();
-		print_r($this->db->last_query()); 
+		// print_r($this->db->last_query()); 
 		return $data;
 	}
 	function data_survei_lapangan_where($where)
@@ -185,6 +185,66 @@ class Model_data extends CI_Model
 		// print_r($this->db->last_query()); 
 		return $data;
 	}
+
+	//crud data survei
+	function ambil_data_kriteria($table){
+		$this->db->select('*');
+		$this->db->from($table);				
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		return $data;
+	}
+	function tampil_data_kriteria(){
+		$query = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
+        FROM
+        	data_lapangan a
+        JOIN
+            data_alternatif b ON a.id_alternatif = b.id_alternatif
+        JOIN
+			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria");
+		$data=$query->result_array();
+		return $data;
+	}
+	//fungsi tambah
+	function tambah_data_kriteria($namakolom1,$namakolom2,$table){
+		$query = $this->db->query("SELECT $namakolom1,$namakolom2 FROM $table");
+		$data=$query->result_array();
+		return $data;
+	}
+	//fungsi hapus
+	function hapus_data_alternatif($namakolom1,$table,$where){
+		// $query = $this->db->query("SELECT $namakolom1 FROM $table WHERE $where");
+		$this->db->select($namakolom1);
+		$this->db->from($table);			
+		$this->db->where($where);
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		return $data;
+	}
+	//fungsi edit
+	function tampil_edit_data_lapangan($nik_alternatif){
+		$query = $this->db->query("SELECT b.*, d.nama_kriteria, a.id_lapangan, c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
+        FROM
+        	data_lapangan a
+        JOIN
+            data_alternatif b ON a.id_alternatif = b.id_alternatif
+        JOIN
+			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria
+		JOIN
+			data_kriteria d ON c.id_kriteria = d.id_kriteria WHERE b.nik_alternatif = $nik_alternatif");
+		$data=$query->result_array();
+		return $data;
+	}
+	function edit_data_lapangan($namakolom1,$table,$where){
+		// $query = $this->db->query("SELECT $namakolom1 FROM $table WHERE $where");
+		$this->db->select($namakolom1);
+		$this->db->from($table);			
+		$this->db->where($where);
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		return $data;
+	}
+
 }
 
 ?>
