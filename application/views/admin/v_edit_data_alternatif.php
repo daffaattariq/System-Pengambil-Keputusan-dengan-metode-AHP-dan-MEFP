@@ -57,7 +57,7 @@
                                         <label for="inputPassword">Nama Dusun<span class="text-danger">*</span></label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="nama_dusun" required>     
                                             <option value="">-- Level User --</option>                                               
-                                            <option value="Banel">Banel</option>
+                                            <option value="Banel">Benel</option>
                                             <option value="Lowokjati">Lowokjati</option>
                                             <option value="Nampes">Nampes</option>
                                             <option value="Pakel">Pakel</option>

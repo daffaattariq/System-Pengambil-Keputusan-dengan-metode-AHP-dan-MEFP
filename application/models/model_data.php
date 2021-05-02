@@ -118,6 +118,13 @@ class Model_data extends CI_Model
 		return $data;
 	}
 
+	function get_count_survey($table)
+	{
+		$query = $this->db->query("SELECT *, COUNT( * ) AS total FROM $table GROUP BY id_alternatif");
+		$data = $query->num_rows();
+		return $data;
+	}
+
 	
 	// Belum digunakan
 	// function data_login_where()
@@ -194,7 +201,7 @@ class Model_data extends CI_Model
 		$data= $query->result_array();
 		return $data;
 	}
-	function tampil_data_kriteria(){
+	function tampil_data_lapangan(){
 		$query = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
         FROM
         	data_lapangan a

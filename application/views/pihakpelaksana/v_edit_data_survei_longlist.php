@@ -68,7 +68,7 @@
                                                 {
                                                     if($data_lapangan['id_kriteria']== $k['id_kriteria']){
                                                         ?>
-                                                        <option  value="<?php echo $data_lapangan['id_subkriteria']?>"selected>
+                                                        <option  value="<?php echo $data_lapangan['id_subkriteria']?>">
                                                         <?php echo $data_lapangan['nama_subkriteria']?>
                                                         
                                                         <?php

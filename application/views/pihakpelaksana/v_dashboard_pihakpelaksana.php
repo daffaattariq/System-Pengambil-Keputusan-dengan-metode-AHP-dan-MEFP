@@ -47,6 +47,21 @@
                         </a>
 	                </div>
                     <div class="col-xl-4 col-lg-1 col-md-6 col-sm-12 col-12">
+                        <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_survey_lapangan') ?>">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-inline-block">
+                                        <h5 class="text-muted">Total Data Survei</h5>
+                                        <h2 class="mb-1"><?php $a=htmlentities($total_data_survey_lapangan, ENT_QUOTES,'utf-8'); echo($a);?></h2>
+                                    </div>
+                                    <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
+                                        <i class="fab fa-readme fa-fw fa-sm text-info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+	                </div>
+                    <div class="col-xl-4 col-lg-1 col-md-6 col-sm-12 col-12">
                         <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_kriteria') ?>">
                             <div class="card">
                                 <div class="card-body">
@@ -61,7 +76,7 @@
                             </div>
                         </a>
 	                </div>
-                    <div class="col-xl-4 col-lg-1 col-md-6 col-sm-12 col-12">
+                    <!-- <div class="col-xl-4 col-lg-1 col-md-6 col-sm-12 col-12">
                         <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/sub_data_kriteria') ?>">
                             <div class="card">
                                 <div class="card-body">
@@ -75,7 +90,7 @@
                                 </div>
                             </div>
                         </a>
-	                </div>                
+	                </div>                 -->
                 </div>
             </div>
         </div>

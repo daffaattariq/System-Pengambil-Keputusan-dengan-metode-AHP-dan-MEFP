@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/vendor/datatables/css/dataTables.bootstrap4.css">
-    <title>Data Survei Longlist</title>
+    <title>Data Perhitungan MFEP</title>
 </head>
 
 <body>
@@ -28,18 +28,15 @@
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <div class="card">
-                    <h3 class="card-header">DATA SURVEI LONGLIST
-                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>
-                        
+                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
+                        <!-- <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
                     </h3>
                     <?php
-
                     if(!$data_kriteria){
                         echo "<br><h3 class='card-body'>Data Kosong</h3>";
                     }
                     else{
                     ?>
-
                     <div class="card-body">
                     <?php
                         if ($this->session->flashdata('success')){?>
@@ -59,7 +56,7 @@
                                     <th rowspan='2' style="vertical-align:middle">#</th>
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
-                                    <th rowspan='2' style="vertical-align:middle">Aksi</th>
+                                    <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
                                 </tr>
                                 <tr>
                                   <?php
@@ -84,10 +81,10 @@
                                 // }
                                 
                             ?>
-                                  <td class="btn-group">
+                                  <!-- <td class="btn-group">
                                       <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button  class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
                                       <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
-                                  </td>
+                                  </td> -->
                             <?php
                                 }
                             ?>
@@ -105,9 +102,8 @@
                     ?>
                 </div>
                 <div class="card">
-                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
+                    <h3 class="card-header">NORMALISASI DATA SURVEI LONGLIST
                         <!-- <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
-                        
                     </h3>
                     <?php
 
@@ -147,7 +143,7 @@
                             <tbody>
                             <?php
                                 $i=0;
-                                foreach($data_kriteria_nilai as $nik=>$krit){
+                                foreach($data_kriteria as $nik=>$krit){
                                   echo "<tr>
                                     <td>".(++$i).".</td>
                                     <td>$nik</td>";

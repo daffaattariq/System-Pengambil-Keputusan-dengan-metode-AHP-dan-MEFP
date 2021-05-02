@@ -32,6 +32,13 @@
                         <!-- <a href="<?php echo base_url('c_admin/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
                         
                     </h3>
+                    <?php
+
+                    if(!$data_kriteria){
+                        echo "<br><h3 class='card-body'>Data Kosong</h3>";
+                    }
+                    else{
+                    ?>
                     <div class="card-body">
                     <?php
                         if ($this->session->flashdata('success')){?>
@@ -86,12 +93,21 @@
                             }); 
                         </script> 
                     </div>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <div class="card">
                     <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
                         <!-- <a href="<?php echo base_url('c_admin/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
-                        
                     </h3>
+                    <?php
+
+                    if(!$data_kriteria){
+                        echo "<br><h3 class='card-body'>Data Kosong</h3>";
+                    }
+                    else{
+                    ?>
                     <div class="card-body">
                     <?php
                         if ($this->session->flashdata('success')){?>
@@ -146,6 +162,9 @@
                             }); 
                         </script> 
                     </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

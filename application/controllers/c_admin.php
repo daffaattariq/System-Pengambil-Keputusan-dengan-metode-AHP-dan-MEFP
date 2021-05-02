@@ -78,12 +78,21 @@ class C_Admin extends CI_Controller {
 	public function hapus_data_alternatif()
 	{
 		$id_alternatif = $this->input->get('id_alternatif');
-		$where = array(            
-            'id_alternatif' =>  $id_alternatif
-        );
-		// print($id_longlist);die();
-        $this->model_data->delete_data($where,'data_alternatif');
-     	redirect('c_admin/data_alternatif');	
+			$where = array(            
+				'id_alternatif' =>  $id_alternatif
+			);
+		try{
+			
+			// print($id_longlist);die();
+			$this->model_data->delete_data($where,'data_alternatif');
+			redirect('c_admin/data_alternatif');	
+		}
+		catch(Exception $e){
+			// Print($e->getMessage());
+			$this->db->_error_message();
+			redirect('c_admin/data_alternatif');
+		}
+		
 			   
 	}
 
@@ -592,26 +601,51 @@ class C_Admin extends CI_Controller {
 		// $this->load->view('pihakpelaksana/v_data_survei_longlist' ,$data);
 		
 		//data tidak paten
-		$kriteria = $this->db->query("SELECT * FROM data_kriteria")->result_array();
+		// $kriteria = $this->db->query("SELECT * FROM data_kriteria")->result_array();
 		
-		$tampil = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
-        FROM
-        	data_lapangan a
-        JOIN
-            data_alternatif b ON a.id_alternatif = b.id_alternatif
-        JOIN
-			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria");
+		// $tampil = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
+        // FROM
+        // 	data_lapangan a
+        // JOIN
+        //     data_alternatif b ON a.id_alternatif = b.id_alternatif
+        // JOIN
+		// 	data_subkriteria c ON a.id_subkriteria = c.id_subkriteria");
 
-		$row= $tampil->result_array();
-		foreach($row as $row){
-			$data_kriteria[$row['nik_alternatif']][$row['id_kriteria']]=$row['nama_subkriteria'];
-			$data_kriteria_nilai[$row['nik_alternatif']][$row['id_kriteria']]=$row['nilai_subkriteria'];
+		// $row= $tampil->result_array();
+		// foreach($row as $row){
+		// 	$data_kriteria[$row['nik_alternatif']][$row['id_kriteria']]=$row['nama_subkriteria'];
+		// 	$data_kriteria_nilai[$row['nik_alternatif']][$row['id_kriteria']]=$row['nilai_subkriteria'];
+		// }
+		// // print_r($data);
+		// $data['total_kriteria']= count($kriteria);
+		// $data['kriteria']= $kriteria;
+		// $data['data_kriteria']= $data_kriteria;
+		// $data['data_kriteria_nilai']=$data_kriteria_nilai;
+
+		// // print($data['data_longlist'][0]['kode_longlist']);die();
+		// $this->load->view('admin/v_side_bar');
+		// $this->load->view('admin/v_navbar');
+		// $this->load->view('admin/v_data_survei_longlist_admin' ,$data);
+		$kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
+		$tampil_data_lapangan = $this->model_data->tampil_data_lapangan();
+		
+		$data_kriteria=[];
+		foreach($tampil_data_lapangan as $tampil_data_lapangan){
+			$data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			$data_kriteria_nilai[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
 		}
-		// print_r($data);
+	
+		// print_r($data);x	
 		$data['total_kriteria']= count($kriteria);
 		$data['kriteria']= $kriteria;
-		$data['data_kriteria']= $data_kriteria;
-		$data['data_kriteria_nilai']=$data_kriteria_nilai;
+		if($data_kriteria){
+			$data['data_kriteria']= $data_kriteria;
+			$data['data_kriteria_nilai']= $data_kriteria_nilai;
+		}
+		else{
+			$data['data_kriteria']= null;
+			$data['data_kriteria_nilai']= null;
+		}
 
 		// print($data['data_longlist'][0]['kode_longlist']);die();
 		$this->load->view('admin/v_side_bar');

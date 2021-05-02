@@ -50,7 +50,7 @@
                                                 ?>
                                                 <option 
                                                     
-                                                    value="<?php echo $data_lapangan_nik['id_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?>
+                                                    value="<?php echo $data_lapangan_nik['id_alternatif']?>"><?php echo $data_lapangan_nik['nik_alternatif']?> - <?php echo $data_lapangan_nik['nama_alternatif']?> - <?php echo $data_lapangan_nik['nama_dusun']?> - <?php echo $data_lapangan_nik['rt']?>
                                                 </option>
                                             
                                         <?php
