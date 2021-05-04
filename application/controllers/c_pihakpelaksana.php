@@ -34,15 +34,19 @@ class C_Pihakpelaksana extends CI_Controller {
 		$data_kriteria=[];
 		$data_alternatif_lengkap=[];
 		$data_alternatif_lengkap_nilai=[];
+		$data_alternatif_editdelete=[];
 		foreach($tampil_data_lapangan as $key => $value){
 			$data_alternatif_lengkap[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']."-".$value['nama_dusun']);
+			$data_alternatif_editdelete[$key]= $value['nik_alternatif'];
+
 			$data_alternatif_lengkap_nilai[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']);
 		}
 			
 		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){
-			$data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			// $data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
 			// $data_kriteria_nilai[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
-			// $data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			
+			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
 			$data_kriteria_nilai[$data_alternatif_lengkap_nilai[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
 			
 		}
@@ -52,6 +56,8 @@ class C_Pihakpelaksana extends CI_Controller {
 		$data['kriteria']= $kriteria;
 		if($data_kriteria){
 			$data['data_kriteria']= $data_kriteria;
+			$data['data_alternatif_editdelete'] =$data_alternatif_editdelete;
+
 			$data['data_kriteria_nilai']= $data_kriteria_nilai;
 		}
 		else{
@@ -265,55 +271,87 @@ class C_Pihakpelaksana extends CI_Controller {
 	public function data_hitung_mfep()
 	{	
 		//data tidak paten
-		// $kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
-		// $tampil_data_lapangan = $this->model_data->tampil_data_lapangan();
+		$kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
+		$tampil_data_lapangan = $this->model_data->tampil_data_lapangan();
 		
-		// $data_kriteria=[];
-		// foreach($tampil_data_lapangan as $tampil_data_lapangan){
-		// 	$data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
-		// 	$data_kriteria_nilai[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
-		// }
-	
-		// // print_r($data);x	
-		// $data['total_kriteria']= count($kriteria);
-		// $data['kriteria']= $kriteria;
-		// if($data_kriteria){
-		// 	$data['data_kriteria']= $data_kriteria;
-		// 	$data['data_kriteria_nilai']= $data_kriteria_nilai;
-		// }
-		// else{
-		// 	// $data['data_kriteria']= null;
-		// 	$data['data_kriteria_nilai']= null;
-		// }
-
-		// // print($data['data_longlist'][0]['kode_longlist']);die();
-		// $this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
-		// $this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
-		// $this->load->view('pihakpelaksana/v_data_hitung_mfep' ,$data);
-
-		$kriteria = $this->db->query("SELECT * FROM data_kriteria")->result_array();
 		$data_kriteria=[];
-		$tampil = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
-        FROM
-        	data_lapangan a
-        JOIN
-            data_alternatif b ON a.id_alternatif = b.id_alternatif
-        JOIN
-			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria");
-
-		$row= $tampil->result_array();
-		foreach($row as $row){
-			$data_kriteria[$row['nik_alternatif']][$row['id_kriteria']]=$row['nilai_subkriteria'];
+		$data_alternatif_lengkap=[];
+		$data_alternatif_lengkap_nilai=[];
+		$data_alternatif_nama=[];
+		foreach($tampil_data_lapangan as $key => $value){
+			$data_alternatif_lengkap[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']."-".$value['nama_dusun']);
+			$data_alternatif_nama[$key]= $value['nama_alternatif'];
+			$data_alternatif_lengkap_nik[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']);
+		}
+			
+		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){
+			// $data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			// $data_kriteria_nilai[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
+			
+			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			$data_alternatif_nik[$data_alternatif_lengkap_nik[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
 			
 		}
-		// print_r($data);
+	
+		// print_r($data);x	
 		$data['total_kriteria']= count($kriteria);
 		$data['kriteria']= $kriteria;
-		$data['data_kriteria']= $data_kriteria;
+		if($data_kriteria){
+			$data['data_kriteria']= $data_kriteria;
+			$data['data_alternatif_nama'] =$data_alternatif_nama;
+
+			$data['data_alternatif_nik']= $data_alternatif_nik;
+		}
+		else{
+			$data['data_kriteria']= null;
+			$data['data_kriteria_nilai']= null;
+		}
 		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_data_hitung_mfep' ,$data);
+	}
+
+	public function data_hasil_laporan()
+	{	
+		//data tidak paten
+		$kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
+		$tampil_data_lapangan = $this->model_data->tampil_data_lapangan();
+		
+		$data_kriteria=[];
+		$data_alternatif_lengkap=[];
+		$data_alternatif_nama=[];
+		$data_alternatif_lengkap_nik=[];
+
+		foreach($tampil_data_lapangan as $key => $value){
+			$data_alternatif_lengkap[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']."-".$value['nama_dusun']);
+			$data_alternatif_nama[$key]= $value['nama_alternatif'];
+			$data_alternatif_lengkap_nik[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']);
+		}
+			
+		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){	
+			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			$data_alternatif_nik[$data_alternatif_lengkap_nik[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
+			
+		}
+	
+		// print_r($data);x	
+		$data['total_kriteria']= count($kriteria);
+		$data['kriteria']= $kriteria;
+		if($data_kriteria){
+			$data['data_kriteria']= $data_kriteria;
+			$data['data_alternatif_nama'] =$data_alternatif_nama;
+			$data['data_alternatif_nik']= $data_alternatif_nik;
+		}
+		else{
+			$data['data_kriteria']= null;
+			$data['data_alternatif_nama'] = null;
+			$data['data_alternatif_nik']= null;
+		}
+		
+		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_data_hasil_laporan' ,$data);
 	}
 
 }

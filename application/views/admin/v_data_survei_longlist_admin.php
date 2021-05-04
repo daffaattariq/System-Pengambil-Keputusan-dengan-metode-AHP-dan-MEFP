@@ -139,7 +139,7 @@
                             <tbody>
                             <?php
                                 $i=0;
-                                foreach($data_kriteria_nilai as $nik=>$krit){
+                                foreach($data_alternatif_nik as $nik=>$krit){
                                   echo "<tr>
                                     <td>".(++$i).".</td>
                                     <td>$nik</td>";

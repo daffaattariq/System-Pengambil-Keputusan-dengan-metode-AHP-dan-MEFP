@@ -35,7 +35,7 @@
                             <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_hitung_mfep') ?>"><i class="fas fa-fw fa-check"></i>Perhitungan MFEP</a>
                         </li>   
                         <li class="nav-item">
-                            <a class="nav-link" href=""><i class="fa fa-fw fa-eye"></i>Hasil Laporan</a>
+                            <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_hasil_laporan') ?>"><i class="fa fa-fw fa-eye"></i>Hasil Laporan</a>
                         </li>                          
                     </ul>
                 </div>                            

@@ -80,7 +80,7 @@
                             <a class="nav-link " href="<?php echo base_url('c_admin/data_survey_lapangan') ?>"><i class="fa fa-fw fa-user-circle"></i>Data Survei Longlist</a>
                         </li>  
                         <li class="nav-item">
-                            <a class="nav-link " href=""><i class="fa fa-fw fa-eye"></i>Hasil Laporan</a>
+                            <a class="nav-link " href="<?php echo base_url('c_admin/data_hasil_laporan') ?>"><i class="fa fa-fw fa-eye"></i>Hasil Laporan</a>
                         </li>                          
                     </ul>
                 </div>                            
