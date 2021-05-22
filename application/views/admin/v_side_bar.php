@@ -68,7 +68,7 @@
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('c_admin/data_kriteria') ?>">Analisa Kriteria</a>
+                                        <a class="nav-link" href="<?php echo base_url('c_admin/analisa_kriteria') ?>">Analisa Kriteria</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="<?php echo base_url('c_admin/data_subkriteria') ?>">Perhitungan AHP</a>

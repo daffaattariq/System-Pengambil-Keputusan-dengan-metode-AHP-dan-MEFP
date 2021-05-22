@@ -208,7 +208,8 @@ class Model_data extends CI_Model
         JOIN
             data_alternatif b ON a.id_alternatif = b.id_alternatif
         JOIN
-			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria");
+			data_subkriteria c ON a.id_subkriteria = c.id_subkriteria
+		GROUP BY 	a.id_alternatif, a.id_subkriteria");
 		$data=$query->result_array();
 		return $data;
 	}

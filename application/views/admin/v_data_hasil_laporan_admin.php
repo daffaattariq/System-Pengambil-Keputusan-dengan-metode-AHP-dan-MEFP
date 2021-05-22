@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <title>Data Perhitungan MFEP</title>
+    <title>Hasil Laporan</title>
 </head>
 
 <body>
@@ -143,6 +143,9 @@
                                   echo "<tr>
                                     <td>".(++$i).".</td>
                                     <td>$nik</td>";
+                                    $nama=$data_alternatif_nama_alter[$nik];
+                                    $nama_dusun=$data_alternatif_nama_dusun[$nik];
+                                    $rt_rw=$data_alternatif_nama_rt_rw[$nik];
 
                                   foreach($kriteria as $k){
                                     $id_kriteria = $k['id_kriteria'];
@@ -158,7 +161,7 @@
                                       <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
                                   </td> -->
                             <?php
-                                $arr[] = ["nik" => $nik , "total" => $hitung];
+                                $arr[] = ["nik" => $nik , "nama"=> $nama,"nama_dusun"=>$nama_dusun,"rt/rw"=>$rt_rw,"total" => $hitung];
                                 $hitung = 0;
                                   $j++;
                                 }
@@ -180,7 +183,7 @@
                     ?>
                 </div>
                 <div class="card">
-                    <h3 class="card-header">RANGKING DATA SURVEI LONGLIST</h3>
+                    <h3 class="card-header">HASIL LAPORAN DATA SURVEI LONGLIST</h3>
                     <?php
 
                     if(!$data_kriteria){
@@ -249,6 +252,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>NIK Alternatif</th>
+                                    <th>Nama </th>
+                                    <th>Nama Dusun </th>
+                                    <th>RT/RW </th>
                                     <th>Total</th>
                                     <th>Rangking</th>
                                     <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
@@ -258,19 +264,20 @@
                             <tbody>
                             <?php
                                 $j = 0;
-                                $i=0;
-                                                          
+                                $i=0;                          
                                 $bobot = [0,0.173490603,0.127720739,0.078283327,0.038081107,0.345193219,0.237231005];
                                 
-
                                 foreach($arr as $arr){
                                     $i++;
                                   ?>
                                   <tr>
                                     <td><?php echo $i?></td>
                                     <td><?php echo $arr['nik'] ?></td>
-
+                                    <td><?php echo $arr['nama'] ?></td>
+                                    <td>Dusun <?php echo $arr['nama_dusun'] ?></td>
+                                    <td><?php echo $arr['rt/rw'] ?></td>
                                     <td><?php echo $arr['total'] ?></td>             
+                                    <!-- rangking -->
                                     <td><?php echo $i?></td>
                             <?php
                                 $j++;

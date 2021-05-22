@@ -326,13 +326,17 @@ class C_Pihakpelaksana extends CI_Controller {
 		foreach($tampil_data_lapangan as $key => $value){
 			$data_alternatif_lengkap[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']."-".$value['nama_dusun']);
 			$data_alternatif_nama[$key]= $value['nama_alternatif'];
-			$data_alternatif_lengkap_nik[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']);
+			$data_alternatif_lengkap_nik[$key] = ($value['nik_alternatif']);
+			$data_alternatif_nama_dsn[$key]= ($value['nama_dusun']);
+			$data_alternatif_nama_rtrw[$key]= ($value['rt']."/".$value['rw']);
 		}
 			
 		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){	
 			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
 			$data_alternatif_nik[$data_alternatif_lengkap_nik[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
-			
+			$data_alternatif_nama_alter[$data_alternatif_lengkap_nik[$key]]= $data_alternatif_nama[$key];
+			$data_alternatif_nama_dusun[$data_alternatif_lengkap_nik[$key]]= $data_alternatif_nama_dsn[$key];
+			$data_alternatif_nama_rt_rw[$data_alternatif_lengkap_nik[$key]]= $data_alternatif_nama_rtrw[$key];
 		}
 	
 		// print_r($data);x	
@@ -342,11 +346,17 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data['data_kriteria']= $data_kriteria;
 			$data['data_alternatif_nama'] =$data_alternatif_nama;
 			$data['data_alternatif_nik']= $data_alternatif_nik;
+			$data['data_alternatif_nama_alter'] =$data_alternatif_nama_alter;
+			$data['data_alternatif_nama_dusun'] =$data_alternatif_nama_dusun;
+			$data['data_alternatif_nama_rt_rw'] =$data_alternatif_nama_rt_rw;
+
 		}
 		else{
 			$data['data_kriteria']= null;
 			$data['data_alternatif_nama'] = null;
 			$data['data_alternatif_nik']= null;
+			$data['data_alternatif_nama_alter'] =null;
+			$data['data_alternatif_nama_dusun'] =null;
 		}
 		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');

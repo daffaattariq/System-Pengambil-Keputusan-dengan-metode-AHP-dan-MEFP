@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_Admin extends CI_Controller {
+class BACKUP extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -363,8 +363,9 @@ class C_Admin extends CI_Controller {
 		$matrik = array();
 		$urut 	= 0;
 		$n = 6;
-		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');	
 		
+		
+
 		for ($x=0; $x <= ($n-2) ; $x++) {
 			for ($y=($x+1); $y <= ($n-1) ; $y++) {
 				$urut++;
@@ -384,51 +385,37 @@ class C_Admin extends CI_Controller {
 			}
 		}
 
-			// diagonal --> bernilai 1
-		for ($i = 0; $i <= ($n-1); $i++) {
-			$matrik[$i][$i] = 1;
+		// diagonal --> bernilai 1
+	for ($i = 0; $i <= ($n-1); $i++) {
+		$matrik[$i][$i] = 1;
+	}
+
+	// inisialisasi jumlah tiap kolom dan baris kriteria
+	$jmlmpb = array();
+	$jmlmnk = array();
+	for ($i=0; $i <= ($n-1); $i++) {
+		$jmlmpb[$i] = 0;
+		$jmlmnk[$i] = 0;
+	}
+
+	// menghitung jumlah pada kolom kriteria tabel perbandingan berpasangan
+	for ($x=0; $x <= ($n-1) ; $x++) {
+		for ($y=0; $y <= ($n-1) ; $y++) {
+			$value		= $matrik[$x][$y];
+			$jmlmpb[$y] += $value;
 		}
+	}
 
-		// inisialisasi jumlah tiap kolom dan baris kriteria
-		$jmlmpb = array();
-		$jmlmnk = array();
-		for ($i=0; $i <= ($n-1); $i++) {
-			$jmlmpb[$i] = 0;
-			$jmlmnk[$i] = 0;
+	for ($x=0; $x <= ($n-1); $x++) { 
+		for ($y=0; $y <= ($n-1); $y++) { 
+			echo " ".round($matrik[$x][$y],5)." ";
 		}
+	echo "<br>";
+	}
 
-		// menghitung jumlah pada kolom kriteria tabel perbandingan berpasangan
-		for ($x=0; $x <= ($n-1) ; $x++) {
-			for ($y=0; $y <= ($n-1) ; $y++) {
-				$value		= $matrik[$x][$y];
-				$jmlmpb[$y] += $value;
-			}
-		}
-
-		$data['awal'] = array();
-		for ($x=0; $x <= ($n-1); $x++) { 
-			for ($y=0; $y <= ($n-1); $y++) { 
-				$data['awal'][$x][$y] = round($matrik[$x][$y],5);
-			}
-		
-		}
-
-		
-
-		for ($i=0; $i <= ($n-1); $i++) { 
-			// round($jmlmpb[$i],5);
-		}
-
-		
-
-
-		
-		// print($bobot[4]);die();
-
-		$this->load->view('admin/v_side_bar');
-		$this->load->view('admin/v_navbar');
-		$this->load->view('admin/v_ahp_proses' ,$data );
-
+	for ($i=0; $i <= ($n-1); $i++) { 
+		echo "<th>".round($jmlmpb[$i],5)."</th>";
+	}
 
 	}
 
