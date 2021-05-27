@@ -28,20 +28,10 @@
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <div class="card">
-                    <h3 class="card-header">Analisa Kriteria
+                    <h3 class="card-header">Tabel Perbandingan Berpasangan
                     </h3>
                     <div class="card-body">
-                    <?php
-                        if ($this->session->flashdata('success')){?>
-                        <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <?php echo $this->session->flashdata('success')?>
-                        </div>
-                    <?php
-                        }
-                    ?>      
+                    
 
                     <!-- DATA AWAL AHP -->
                     <table class="table table-hover" >
@@ -96,9 +86,18 @@
                             ?>
                             </tbody>
                         </table>
-
-                                <!-- TABLE @ -->
-                        
+                        <!-- <script type="text/javascript"> 
+                            $(document).ready(function() { 
+                                $("#mytable").dataTable(); 
+                            }); 
+                        </script>  -->
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-header">Tabel Analisa Kriteria
+                    </h3>
+                    <div class="card-body">
+                        <!-- DATA AWAL AHP -->
                         <table class="table table-hover" >
                         <thead>
                             <tr>
@@ -159,10 +158,13 @@
                             ?>
                             </tbody>
                         </table>
-
-                        
-                        <!-- TABLE @ -->
-                        
+                    
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-header">Tabel Analisa Prioritas</h3>
+                    <div class="card-body">
+                        <!-- DATA AWAL AHP -->
                         <table class="table table-hover" >
                         <thead>
                             <tr>
@@ -189,7 +191,6 @@
                                     // var_dump($nama_kriteria);die();
                                 ?>
                                 <th>Jumlah</th> 
-                               
                             </tr>
                         </thead>
                         <tbody>
@@ -214,89 +215,83 @@
                                         $jumlah = $jmlkp[$x];
                                        
                                         echo"<td>$jumlah</td>";
-                                       
                                         echo"<tr>";                                       
-                                    
                                     
                                 }
                                 
                             ?>
                             </tbody>
                         </table>
-
-                         <!-- TABLE @ -->
-                        
-                         <table class="table table-hover" >
-                        <thead>
-                            <tr>
-                                <th scope="col">LAMDA</th>
-                               
-                                
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-header">Tabel Nilai Konsistensi Prioritas</h3>
+                    <div class="card-body">
+                        <!-- DATA nilai λ  -->
+                        <table class="table table-hover" >
+                            <thead>
                                 <tr>
-                                <td>nilai</td>
-                                <td><?php echo $nilai ?></td>
+                                    <th scope="col">Nilai λ Maksimal</th>                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <td>nilai</td> -->
+                                    <td><?php echo $nilai ?></td>
                                 </tr>
                             </tbody>
                         </table>
 
-                         <!-- TABLE @ -->
-                        
-                         <table class="table table-hover" >
-                        <thead>
-                            <tr>
-                                <th scope="col">CI</th>
-                               
-                                
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-                                <td>nilai</td>
-                                <td><?php echo $ci ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <!-- TABLE @ -->
+                         <!-- data nilai CI -->
                         
                         <table class="table table-hover" >
-                        <thead>
-                            <tr>
-                                <th scope="col">CR</th>
-                               
-                                
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
+                            <thead>
                                 <tr>
-                                <td>nilai</td>
-                                <td><?php echo $cr ?></td>
+                                    <th scope="col">Nilai Consistency Index</th>   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <td>nilai</td> -->
+                                    <td><?php echo $ci ?></td>
                                 </tr>
                             </tbody>
                         </table>
 
+                        <!-- data nilai CR -->
+                        
+                        <table class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nilai Consistency Ratio</th>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <td>nilai</td> -->
+                                    <td><?php echo $cr ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <?php
                             if ($cr > 0.1) {
                         ?>        
                         <div class="alert alert-danger" role="alert">
-                                    Nilai Consistency Ratio melebihi 10% !!!                        
-                                <p>Mohon input kembali tabel perbandingan...</p>                           
+                                Nilai Consistency Ratio melebihi 0,1 !!!                        
+                                <p>Mohon input kembali tabel perbandingan berpasangan</p>                           
                         </div>
                         <?php
                             }
+                            else{
                         ?>
-
-                        <!-- <script type="text/javascript"> 
-                            $(document).ready(function() { 
-                                $("#mytable").dataTable(); 
-                            }); 
-                        </script>  -->
+                        <div class="alert alert-success" role="alert">
+                                Nilai Consistency Ratio kurang dari 0,1 !!!                        
+                                <p>Data Nilai Konsisten.</p>                           
+                        </div>
+                        <?php
+                            }
+                            
+                        ?>
                     </div>
                 </div>
             </div>
