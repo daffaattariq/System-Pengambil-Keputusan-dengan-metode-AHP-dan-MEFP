@@ -68,9 +68,19 @@ class Model_data extends CI_Model
 		// print_r($this->db->last_query()); 
 		return $query->result_array();		
 	}
+	function data_tidakurut($table){
+		// $this->db->order_by($namakolom, 'ASC');
+		$query = $this->db->get($table);
+		// print_r($this->db->last_query()); 
+		return $query->result_array();		
+	}
 	function delete_data($where,$table)
 	{
 		$this->db->where($where);
+		$this->db->delete($table);
+	}
+	function delete($table)
+	{		
 		$this->db->delete($table);
 	}
 	function pilih_data($where , $table)

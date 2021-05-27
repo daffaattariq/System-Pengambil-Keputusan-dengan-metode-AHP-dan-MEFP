@@ -363,7 +363,11 @@ class C_Admin extends CI_Controller {
 		$matrik = array();
 		$urut 	= 0;
 		$n = 6;
-		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');	
+		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');
+		$data['data_kriteria1'] = $this->model_data->data('kode_kriteria','data_kriteria');
+		$data['data_kriteria2'] = $this->model_data->data('kode_kriteria','data_kriteria');
+		
+			
 		
 		for ($x=0; $x <= ($n-2) ; $x++) {
 			for ($y=($x+1); $y <= ($n-1) ; $y++) {
@@ -405,25 +409,112 @@ class C_Admin extends CI_Controller {
 			}
 		}
 
-		$data['awal'] = array();
+		$data_awal = array();
 		for ($x=0; $x <= ($n-1); $x++) { 
 			for ($y=0; $y <= ($n-1); $y++) { 
-				$data['awal'][$x][$y] = round($matrik[$x][$y],5);
+				$data_awal[$x][$y] = round($matrik[$x][$y],5);
 			}
 		
 		}
-
-		
+		$data['awal'] = $data_awal;
 
 		for ($i=0; $i <= ($n-1); $i++) { 
-			// round($jmlmpb[$i],5);
+			$data_jumlah[$i] = round($jmlmpb[$i],5);
+		}
+		$data['jumlah'] = $data_jumlah;
+
+		//inilisasi
+		$jmlmnk = array();
+		$jmlmpb = array();
+		$jmlkp = array();
+		for ($i=0; $i <= ($n-1); $i++) {
+			$jmlmpb[$i] = 0;
+			$jmlmnk[$i] = 0;
+			$jmlkp[$i] = 0;
+		}
+
+		for ($x=0; $x <= ($n-1) ; $x++) {
+			for ($y=0; $y <= ($n-1) ; $y++) {
+				$value		= $matrik[$x][$y];
+				$jmlmpb[$y] += $value;
+			}
+		}
+		
+		//hapus
+		for ($x=0; $x <= ($n-1) ; $x++) {
+			for ($y=0; $y <= ($n-1) ; $y++) {
+				$matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
+				$value	= $matrikb[$x][$y];
+				$jmlmnk[$x] += $value;
+			}
+			$pv[$x]	 = $jmlmnk[$x] / $n;
+
+			$where = array(			
+				'status' => 0			
+			);
+
+			$this->model_data->delete_data($where,'kriteria_bobot');
+
+
+
+		}
+
+		//tambah
+		for ($x=0; $x <= ($n-1) ; $x++) {
+			for ($y=0; $y <= ($n-1) ; $y++) {
+				$matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
+				$value	= $matrikb[$x][$y];
+				$jmlmnk[$x] += $value;
+			}
+			$pv[$x]	 = $jmlmnk[$x] / $n;
+
+
+			$data_insert = array(
+				'nilai_bobot'  => $pv[$x]	,
+				'status' => 0			
+			);
+			$this->model_data->insert($data_insert,'kriteria_bobot');
+
 		}
 
 		
 
+		for ($x=0; $x <= ($n-1) ; $x++) {
+			for ($y=0; $y <= ($n-1) ; $y++) {
+				$matrikp[$x][$y] = $matrik[$x][$y] * $pv[$y];
+				$value	= $matrikp[$x][$y];
+				$jmlkp[$x] += $value;
+			}			
+		}
 
+		$nilai = 0;
+		for($x=0; $x<6; $x++)
+		{
+			$lamda[$x] = $jmlkp[$x] / $pv[$x];
+			
+			$nilai = $nilai + $lamda[$x];
+		}
 		
-		// print($bobot[4]);die();
+		$nilai = $nilai/6;
+		$ir = 1.24;
+
+		$ci = ($nilai-6)/(6-1);
+
+		$cr = $ci/$ir;
+
+			//dibawah 0.01 konsiten , diatas  tidak konsisten
+		
+			
+
+		$data['jmlmnk'] = $jmlmnk;
+		$data['jmlkp'] = $jmlkp;
+		$data['matrikb'] = $matrikb;
+		$data['matrikp'] = $matrikp;
+		$data['pv'] = $pv;
+		$data['nilai'] = $nilai;
+		$data['ci'] = $ci;
+		$data['cr'] = $cr;
+		
 
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
