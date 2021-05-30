@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="../assets/vendor/datatables/css/dataTables.bootstrap4.css"> -->
-    <title>Data Kriteria</title>
+    <title>Data Perhitungan AHP</title>
 </head>
 
 <body>
@@ -28,10 +27,8 @@
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <div class="card">
-                    <h3 class="card-header">Tabel Perbandingan Berpasangan
-                    </h3>
+                    <h3 class="card-header">Tabel Perbandingan Berpasangan</h3>
                     <div class="card-body">
-                    
 
                     <!-- DATA AWAL AHP -->
                     <table class="table table-hover" >
@@ -41,11 +38,8 @@
                                 <?php
                                 $number = 0;
                                 $i = 0;
-                                $n = 6;
-                                $j=0;
                                 $nama_kriteria = [];
                                 $kode_kriteria = [];
-
                                 foreach($data_kriteria as $data_kriteria)
                                 {
                                     $number ++;
@@ -65,7 +59,6 @@
                                 $n =6;
                                 $x = 0;
                                 $y=0;
-                                $f=0;
                                 for ($x=0; $x<=($n-1); $x++){
                                     echo"<tr>";
                                     ?>
@@ -86,16 +79,11 @@
                             ?>
                             </tbody>
                         </table>
-                        <!-- <script type="text/javascript"> 
-                            $(document).ready(function() { 
-                                $("#mytable").dataTable(); 
-                            }); 
-                        </script>  -->
                     </div>
                 </div>
+
                 <div class="card">
-                    <h3 class="card-header">Tabel Analisa Kriteria
-                    </h3>
+                    <h3 class="card-header">Tabel Analisa Kriteria</h3>
                     <div class="card-body">
                         <!-- DATA AWAL AHP -->
                         <table class="table table-hover" >
@@ -105,11 +93,8 @@
                                 <?php
                                 $number = 0;
                                 $i = 0;
-                                $n = 6;
-                                $j=0;
                                 $nama_kriteria = [];
                                 $kode_kriteria = [];
-
                                 foreach($data_kriteria1 as $data_kriteria)
                                 {
                                     $number ++;
@@ -132,27 +117,19 @@
                                 $n =6;
                                 $x = 0;
                                 $y=0;
-                                $f=0;
-                                $k = 0;
                                 for ($x=0; $x <= ($n-1) ; $x++) {
-                                  
                                     ?>
                                     <td><?php echo $nama_kriteria[$x]?></td>
                                     <?php
-                                    // print_r($nama_kriteria[$f]);die;
-                                    
-                                        for ($y=0; $y <= ($n-1) ; $y++) {
-                                           
-                                           $hasil = $matrikb[$x][$y];
-                                           echo"<td>$hasil</td>";
-                                        }
-                                        $jumlah = $jmlmnk[$x];
-                                        $jumlah_pv = $pv[$x];
-                                        echo"<td>$jumlah</td>";
-                                        echo"<td>$jumlah_pv</td>";
-                                        echo"<tr>";                                       
-                                    
-                                    
+                                    for ($y=0; $y <= ($n-1) ; $y++) {       
+                                        $hasil = round($matrikb[$x][$y],5);
+                                        echo"<td>$hasil</td>";
+                                    }
+                                    $jumlah = round($jmlmnk[$x],5);
+                                    $jumlah_pv = round($pv[$x],5);
+                                    echo"<td>$jumlah</td>";
+                                    echo"<td>$jumlah_pv</td>";
+                                    echo"<tr>";                
                                 }
                                 
                             ?>
@@ -161,6 +138,7 @@
                     
                     </div>
                 </div>
+
                 <div class="card">
                     <h3 class="card-header">Tabel Analisa Prioritas</h3>
                     <div class="card-body">
@@ -172,8 +150,6 @@
                                 <?php
                                 $number = 0;
                                 $i = 0;
-                                $n = 6;
-                                $j=0;
                                 $nama_kriteria = [];
                                 $kode_kriteria = [];
 
@@ -198,32 +174,24 @@
                                 $n =6;
                                 $x = 0;
                                 $y=0;
-                                $f=0;
-                                $k = 0;
                                 for ($x=0; $x <= ($n-1) ; $x++) {
-                                  
                                     ?>
                                     <td><?php echo $nama_kriteria[$x]?></td>
                                     <?php
-                                    // print_r($nama_kriteria[$f]);die;
-                                    
-                                        for ($y=0; $y <= ($n-1) ; $y++) {
-                                           
-                                           $hasil = $matrikp[$x][$y];
-                                           echo"<td>$hasil</td>";
-                                        }
-                                        $jumlah = $jmlkp[$x];
-                                       
-                                        echo"<td>$jumlah</td>";
-                                        echo"<tr>";                                       
-                                    
+                                    for ($y=0; $y <= ($n-1) ; $y++) {       
+                                        $hasil = round($matrikp[$x][$y],5);
+                                        echo"<td>$hasil</td>";
+                                    }
+                                    $jumlah = round($jmlkp[$x],5);       
+                                    echo"<td>$jumlah</td>";
+                                    echo"<tr>";
                                 }
-                                
                             ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3 class="card-header">Tabel Nilai Konsistensi Prioritas</h3>
                     <div class="card-body">
@@ -237,7 +205,7 @@
                             <tbody>
                                 <tr>
                                     <!-- <td>nilai</td> -->
-                                    <td><?php echo $nilai ?></td>
+                                    <td><?php echo round($nilai,5) ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -253,7 +221,7 @@
                             <tbody>
                                 <tr>
                                     <!-- <td>nilai</td> -->
-                                    <td><?php echo $ci ?></td>
+                                    <td><?php echo round($ci,5) ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -269,7 +237,7 @@
                             <tbody>
                                 <tr>
                                     <!-- <td>nilai</td> -->
-                                    <td><?php echo $cr ?></td>
+                                    <td><?php echo round($cr,5) ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -322,10 +290,6 @@
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
-
-    <!-- data table -->
-    <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script> -->
 </body>
  
 </html>

@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="../assets/vendor/datatables/css/dataTables.bootstrap4.css"> -->
-    <title>Data Kriteria</title>
+    <title>Data Perbandingan Berpasangan AHP</title>
 </head>
 
 <body>
@@ -88,7 +87,7 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input type ="text" name="nilai<?php echo $number ?>" class="form-control" value=3 required></input>
+                                                        <input type ="number" name="nilai<?php echo $number ?>" class="form-control" required></input>
                                                     <td>
                                                 </tr>
                                     <?php
@@ -99,11 +98,6 @@
                             </table>
                             <a><button class="btn btn-primary btn-sm float-right mr-6" type="submit"> SUBMIT</button></a>
                         </form>
-                        <!-- <script type="text/javascript"> 
-                            $(document).ready(function() { 
-                                $("#mytable").dataTable(); 
-                            }); 
-                        </script>  -->
                     </div>
                 </div>
             </div>
@@ -135,9 +129,6 @@
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
 
-    <!-- data table -->
-    <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script> -->
 </body>
  
 </html>

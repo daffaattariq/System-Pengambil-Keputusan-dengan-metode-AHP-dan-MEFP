@@ -93,6 +93,15 @@ class Model_data extends CI_Model
 			 
 		return $data;
 	}
+	function data_kriteria_bobot()
+	{
+		$this->db->select('*');
+		$this->db->from('kriteria_bobot');					
+		$query=$this->db->get();			
+		$data= $query->result_array();
+			 
+		return $data;
+	}
 	function data_subkriteria()
 	{
 		$this->db->select('*');

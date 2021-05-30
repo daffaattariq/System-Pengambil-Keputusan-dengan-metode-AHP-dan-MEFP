@@ -29,27 +29,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('c_admin/data_alternatif') ?>"><i class="fa fa-fw fa-book"></i>Data Masyarakat</a>
-                            <!-- <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a> -->
-                        </li>                            
-                        <!-- <li class="nav-item ">
-                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">Data Masyarakat <span class="badge badge-success">6</span></a>
-                            <div id="submenu-1" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('c_admin/data_alternatif') ?>">Dusun Banel</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('#') ?>">Dusun Lowokjati</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('#') ?>">Dusun Nampes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('#') ?>">Dusun Pakel</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> -->
+                        </li>
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fab fa-fw fa-readme"></i>Kriteria <span class="badge badge-success">6</span></a>
                             <div id="submenu-1" class="collapse submenu" style="">
@@ -63,21 +43,18 @@
                                 </ul>
                             </div>
                         </li>
-                        <!-- <li class="nav-item ">
-                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-check"></i>AHP <span class="badge badge-success">6</span></a>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-calculator"></i>Perhitungan Metode <span class="badge badge-success">6</span></a>
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('c_admin/analisa_kriteria') ?>">Analisa Kriteria</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('c_admin/tambah_perbandingan') ?>">Perhitungan AHP</a>
-                                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo base_url('c_admin/analisa_kriteria') ?>">Perhitungan AHP</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo base_url('c_admin/data_hitung_mfep') ?>">Perhitungan MFEP</a>
+                                </li>
                                 </ul>
                             </div>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_admin/analisa_kriteria') ?>"><i class="fas fa-fw fa-calculator"></i>Perhitungan AHP</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="<?php echo base_url('c_admin/data_survey_lapangan') ?>"><i class="fa fa-fw fa-user-circle"></i>Data Survei Longlist</a>

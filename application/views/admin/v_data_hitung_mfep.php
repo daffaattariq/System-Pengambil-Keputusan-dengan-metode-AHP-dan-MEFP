@@ -28,28 +28,16 @@
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <center><h1>PERHITUNGAN MULTI FACTOR EVALUATION </h1></center>
+
                 <div class="card">
-                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
-                        <!-- <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
-                    </h3>
+                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST</h3>
                     <?php
                     if(!$data_kriteria){
                         echo "<br><h3 class='card-body'>Data Kosong</h3>";
                     }
                     else{
                     ?>
-                    <div class="card-body">
-                    <?php
-                        if ($this->session->flashdata('success')){?>
-                        <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <?php echo $this->session->flashdata('success')?>
-                        </div>
-                    <?php
-                        }
-                    ?>                           
+                    <div class="card-body">              
                         <table class="table table-hover" id="mytable">
                             <thead>
                                 <tr>
@@ -57,7 +45,6 @@
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
                                     <!-- <th rowspan='2' style="vertical-align:middle">Nama </th> -->
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
-                                    <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
                                 </tr>
                                 <tr>
                                   <?php
@@ -80,8 +67,7 @@
                             ?>
                             <?php
                                 }
-                            ?>
-                                
+                            ?> 
                             </tbody>
                         </table>
                         <script type="text/javascript"> 
@@ -94,28 +80,17 @@
                     }
                     ?>
                 </div>
+                
                 <div class="card">
                     <h3 class="card-header">NORMALISASI DATA SURVEI LONGLIST</h3>
                     <?php
 
-                    if(!$data_kriteria){
+                    if(!$kriteria_bobot){
                         echo "<br><h3 class='card-body'>Data Kosong</h3>";
                     }
                     else{
                     ?>
-                    <div class="card-body">
-                    <?php
-                        if ($this->session->flashdata('success')){?>
-                        <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <?php echo $this->session->flashdata('success')?>
-                        </div>
-                    <?php
-                        }
-                    ?>  
-                                                 
+                    <div class="card-body">                         
                         <table class="table table-hover" id="mytable_nilai">
                             <thead>
                                 <tr>
@@ -148,7 +123,6 @@
                                 $j=0;
                                 $count_1 = 0;
 
-
                                 foreach($data_alternatif_nik as $nik=>$krit){
                                   echo "<tr>
                                     <td>".(++$i).".</td>
@@ -159,21 +133,15 @@
                                     $normalisasi = $krit[$id_kriteria]*$bobot[($id_kriteria-1)];
                                     $hitung = $hitung + $normalisasi;
                                     echo "<td align='center'>$normalisasi </td>";
-                                    
                                     // echo "<td align='center'>$id_kriteria </td>";
                                   }                                  
-                            ?>
-                                  <!-- <td>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
-                                  </td> -->
+                            ?>    
                             <?php
                                 $arr[] = ["nik" => $nik , "total" => $hitung];
                                 $hitung = 0;
                                   $j++;
                                 }
                             ?>
-                                
                             </tbody>
                         </table>
                         <script type="text/javascript"> 
@@ -182,37 +150,21 @@
                             }); 
                         </script> 
                     </div>
-
-                    
                     <?php
                     }
                     ?>
                 </div>
+
                 <div class="card">
                     <h3 class="card-header">RANGKING DATA SURVEI LONGLIST</h3>
                     <?php
-
-                    if(!$data_kriteria){
+                    if(!$kriteria_bobot){
                         echo "<br><h3 class='card-body'>Data Kosong</h3>";
                     }
                     else{
                     ?>
                     <div class="card-body">
                     <?php
-                        if ($this->session->flashdata('success')){?>
-                        <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <?php echo $this->session->flashdata('success')?>
-                        </div>
-                    <?php
-                        }
-                        
-                    ?>  
-
-                    <?php
-
                         function make_comparer() {
                             // Normalize criteria up front so that the comparer finds everything tidy
                             $criteria = func_get_args();
@@ -221,7 +173,6 @@
                                     ? array_pad($criterion, 3, null)
                                     : array($criterion, SORT_ASC, null);
                             }
-                        
                             return function($first, $second) use (&$criteria) {
                                 foreach ($criteria as $criterion) {
                                     // How will we compare this round?
@@ -251,8 +202,7 @@
                             };
                         }
                         usort($arr, make_comparer(['total', SORT_DESC]));
-                    ?>
-                                                 
+                    ?>                       
                         <table class="table table-hover" id="mytable_rangking">
                             <thead>
                                 <tr>
@@ -262,15 +212,12 @@
                                     <th>Rangking</th>
                                     <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
                                 </tr>
-                               
                             </thead>
                             <tbody>
                             <?php
                                 // $j = 0;
-                                $i=0;
-                                                          
+                                $i=0;                      
                                 // $bobot = [0,0.173490603,0.127720739,0.078283327,0.038081107,0.345193219,0.237231005];
-                                
 
                                 foreach($arr as $arr){
                                     $i++;
@@ -280,16 +227,10 @@
                                     <td><?php echo $arr['nik'] ?></td>
                                     <td><?php echo $arr['total'] ?></td>             
                                     <td><?php echo $i?></td>
-                          
-                                  <!-- <td>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
-                                  </td> -->
                             <?php
                                 // $j++;
                                 }
-                            ?>
-                                
+                            ?>  
                             </tbody>
                         </table>
                         <script type="text/javascript"> 
@@ -298,8 +239,6 @@
                             }); 
                         </script> 
                     </div>
-
-                    
                     <?php
                     }
                     ?>

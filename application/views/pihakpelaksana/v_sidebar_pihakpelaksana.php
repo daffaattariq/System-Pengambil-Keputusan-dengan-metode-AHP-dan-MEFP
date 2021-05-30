@@ -31,7 +31,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_survey_lapangan') ?>"><i class="fab fa-fw fa-readme"></i>Data Survei Longlist</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a class="nav-link" href="<?php echo base_url('c_pihakpelaksana/data_hitung_mfep') ?>"><i class="fas fa-fw fa-calculator"></i>Perhitungan MFEP</a>
                         </li>   
                         <li class="nav-item">

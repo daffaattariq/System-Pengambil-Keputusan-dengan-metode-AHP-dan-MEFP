@@ -160,6 +160,7 @@ class C_Admin extends CI_Controller {
 		return $response;
 	}
 
+
 	//data login
 	public function data_login()
 	{	
@@ -346,7 +347,8 @@ class C_Admin extends CI_Controller {
 			
 	}
 
-	//TORIK
+
+	//PERHITUNGAN AHP
 	public function analisa_kriteria()
 	{
 		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');			
@@ -357,7 +359,7 @@ class C_Admin extends CI_Controller {
 		$this->load->view('admin/v_analisa_kriteria' ,$data);
 
 	}
-
+	
 	public function tambah_perbandingan()
 	{
 		$matrik = array();
@@ -367,15 +369,12 @@ class C_Admin extends CI_Controller {
 		$data['data_kriteria1'] = $this->model_data->data('kode_kriteria','data_kriteria');
 		$data['data_kriteria2'] = $this->model_data->data('kode_kriteria','data_kriteria');
 		
-			
 		
 		for ($x=0; $x <= ($n-2) ; $x++) {
 			for ($y=($x+1); $y <= ($n-1) ; $y++) {
 				$urut++;
-				
 				$pilih	= $this->input->post('penting'.$urut);				
 				$bobot 	= $this->input->post('nilai'.$urut);
-				
 				if ($pilih == 1) {
 					$matrik[$x][$y] = $bobot;
 					$matrik[$y][$x] = 1 / $bobot;
@@ -383,22 +382,22 @@ class C_Admin extends CI_Controller {
 					$matrik[$x][$y] = 1 / $bobot;
 					$matrik[$y][$x] = $bobot;
 				}
-	
-
 			}
 		}
 
-			// diagonal --> bernilai 1
+		// diagonal --> bernilai 1
 		for ($i = 0; $i <= ($n-1); $i++) {
 			$matrik[$i][$i] = 1;
 		}
 
 		// inisialisasi jumlah tiap kolom dan baris kriteria
-		$jmlmpb = array();
 		$jmlmnk = array();
+		$jmlmpb = array();
+		$jmlkp = array();
 		for ($i=0; $i <= ($n-1); $i++) {
 			$jmlmpb[$i] = 0;
 			$jmlmnk[$i] = 0;
+			$jmlkp[$i] = 0;
 		}
 
 		// menghitung jumlah pada kolom kriteria tabel perbandingan berpasangan
@@ -414,7 +413,6 @@ class C_Admin extends CI_Controller {
 			for ($y=0; $y <= ($n-1); $y++) { 
 				$data_awal[$x][$y] = round($matrik[$x][$y],5);
 			}
-		
 		}
 		$data['awal'] = $data_awal;
 
@@ -424,15 +422,6 @@ class C_Admin extends CI_Controller {
 		$data['jumlah'] = $data_jumlah;
 
 		//inilisasi
-		$jmlmnk = array();
-		$jmlmpb = array();
-		$jmlkp = array();
-		for ($i=0; $i <= ($n-1); $i++) {
-			$jmlmpb[$i] = 0;
-			$jmlmnk[$i] = 0;
-			$jmlkp[$i] = 0;
-		}
-
 		for ($x=0; $x <= ($n-1) ; $x++) {
 			for ($y=0; $y <= ($n-1) ; $y++) {
 				$value		= $matrik[$x][$y];
@@ -448,15 +437,10 @@ class C_Admin extends CI_Controller {
 				$jmlmnk[$x] += $value;
 			}
 			$pv[$x]	 = $jmlmnk[$x] / $n;
-
 			$where = array(			
 				'status' => 0			
 			);
-
 			$this->model_data->delete_data($where,'kriteria_bobot');
-
-
-
 		}
 
 		//tambah
@@ -467,17 +451,12 @@ class C_Admin extends CI_Controller {
 				$jmlmnk[$x] += $value;
 			}
 			$pv[$x]	 = $jmlmnk[$x] / $n;
-
-
 			$data_insert = array(
-				'nilai_bobot'  => $pv[$x]	,
+				'nilai_bobot'  => $pv[$x],
 				'status' => 0			
 			);
 			$this->model_data->insert($data_insert,'kriteria_bobot');
-
 		}
-
-		
 
 		for ($x=0; $x <= ($n-1) ; $x++) {
 			for ($y=0; $y <= ($n-1) ; $y++) {
@@ -488,22 +467,16 @@ class C_Admin extends CI_Controller {
 		}
 
 		$nilai = 0;
-		for($x=0; $x<6; $x++)
-		{
+		for($x=0; $x<6; $x++){
 			$lamda[$x] = $jmlkp[$x] / $pv[$x];
-			
 			$nilai = $nilai + $lamda[$x];
 		}
 		
 		$nilai = $nilai/6;
 		$ir = 1.24;
-
 		$ci = ($nilai-6)/(6-1);
-
+		//dibawah 0.01 konsiSten , diatas  tidak konsisten
 		$cr = $ci/$ir;
-
-			//dibawah 0.01 konsiten , diatas  tidak konsisten
-		
 			
 
 		$data['jmlmnk'] = $jmlmnk;
@@ -519,9 +492,8 @@ class C_Admin extends CI_Controller {
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
 		$this->load->view('admin/v_ahp_proses' ,$data );
-
-
 	}
+
 
 	//kriteria
 	public function data_kriteria()
@@ -635,13 +607,8 @@ class C_Admin extends CI_Controller {
 		return $response;
 	}
 
-	//PEMBOBOTAN
-	public function tampil_pembobotan(){
-
-	}
-
+	
 	//SUB KRITERIA
-
 	public function data_subkriteria()
 	{
 		
@@ -767,6 +734,7 @@ class C_Admin extends CI_Controller {
 		return $response;
 	}
 
+	// DATA SURVEI ADMIN
 	public function data_survey_lapangan()
 	{
 		
@@ -809,7 +777,8 @@ class C_Admin extends CI_Controller {
 		$this->load->view('admin/v_navbar');
 		$this->load->view('admin/v_data_survei_longlist_admin' ,$data);
 	}
-	
+
+	// DATA HASIL LAPORAN	
 	public function data_hasil_laporan()
 	{	
 		//data tidak paten
@@ -860,6 +829,53 @@ class C_Admin extends CI_Controller {
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
 		$this->load->view('admin/v_data_hasil_laporan_admin' ,$data);
+	}
+
+	// DATA HASIL MFEP
+	public function data_hitung_mfep()
+	{	
+		//data tidak paten
+		$kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
+		$tampil_data_lapangan = $this->model_data->tampil_data_lapangan();
+		
+		$data_kriteria=[];
+		$data_alternatif_lengkap=[];
+		$data_alternatif_lengkap_nilai=[];
+		$data_alternatif_nama=[];
+		foreach($tampil_data_lapangan as $key => $value){
+			$data_alternatif_lengkap[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']."-".$value['nama_dusun']);
+			$data_alternatif_nama[$key]= $value['nama_alternatif'];
+			$data_alternatif_lengkap_nik[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']);
+		}
+			
+		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){
+			// $data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			// $data_kriteria_nilai[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
+			
+			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			$data_alternatif_nik[$data_alternatif_lengkap_nik[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
+			
+		}
+	
+		// print_r($data);x	
+		$data['total_kriteria']= count($kriteria);
+		$data['kriteria']= $kriteria;
+		if($data_kriteria){
+			$data['data_kriteria']= $data_kriteria;
+			$data['data_alternatif_nama'] =$data_alternatif_nama;
+
+			$data['data_alternatif_nik']= $data_alternatif_nik;
+		}
+		else{
+			$data['data_kriteria']= null;
+			$data['data_kriteria_nilai']= null;
+		}
+
+		$data['kriteria_bobot'] = $this->model_data->data_kriteria_bobot();
+		
+		$this->load->view('admin/v_side_bar');
+		$this->load->view('admin/v_navbar');
+		$this->load->view('admin/v_data_hitung_mfep' ,$data);
 	}
 }
 ?>
