@@ -19,6 +19,11 @@ class C_Admin extends CI_Controller {
 		$data['total_data_login'] = $this->model_data->get_count('data_login');
 		$data['total_data_alternatif'] = $this->model_data->get_count('data_alternatif');
 
+		//chart
+		$data_chart = $this->model_data->data_kriteria_bobot_chart()->result();
+		$data['data_chart'] = json_encode($data_chart);	
+				
+
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
 		
@@ -31,7 +36,17 @@ class C_Admin extends CI_Controller {
 	{
 		$data['data_alternatif'] = $this->model_data->data('nama_dusun','data_alternatif');
 
-		// print($data['data_longlist'][0]['kode_longlist']);die();
+		if($this->session->flashdata('pesan_error') != 0)
+		{
+			$data['pesan_error'] = $this->session->flashdata('pesan_error');
+		}
+		else
+		{
+			$data['pesan_error'] = 0;
+		}
+
+		// print($this->session->flashdata('pesan_error'));die();
+
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
 		$this->load->view('admin/v_data_alternatif' ,$data);
@@ -46,7 +61,7 @@ class C_Admin extends CI_Controller {
 
 	public function tambah_data_alternatif()
 	{
-		$this->form_validation->set_rules('nik_alternatif', 'NIK', 'is_unique[data_alternatif.nik_alternatif]|required');
+		$this->form_validation->set_rules('nik_alternatif', 'NIK', 'is_unique[data_alternatif.nik_alternatif]|required|min_length[16]|max_length[16]required');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('nik_alternatif', form_error('nik_alternatif'));
@@ -54,7 +69,6 @@ class C_Admin extends CI_Controller {
 		}
 		else
 		{
-			// $kode_longlist = $this->input->post('kode_longlist');
 			$nik_alternatif = $this->input->post('nik_alternatif',true);
 			$nama_alternatif = $this->input->post('nama_alternatif',true);
 			$nama_dusun = $this->input->post('nama_dusun',true);
@@ -70,6 +84,7 @@ class C_Admin extends CI_Controller {
 			);
 			
 			$this->model_data->insert($data_insert,'data_alternatif');
+			$this->session->set_flashdata('success','Berhasil Menambah Data');
 			redirect('c_admin/data_alternatif');
 		}
 				
@@ -81,19 +96,24 @@ class C_Admin extends CI_Controller {
 			$where = array(            
 				'id_alternatif' =>  $id_alternatif
 			);
-		try{
-			
-			// print($id_longlist);die();
+
+		$cek = $this->model_data->cek_data_alternatif($id_alternatif);
+
+		if(!empty($cek))
+		{
+			$pesan_error = 1;
+						
+			$this->session->set_flashdata('pesan_error',$pesan_error);
+			redirect('c_admin/data_alternatif' , $data);
+		}
+		else
+		{
 			$this->model_data->delete_data($where,'data_alternatif');
-			redirect('c_admin/data_alternatif');	
-		}
-		catch(Exception $e){
-			// Print($e->getMessage());
-			$this->db->_error_message();
-			redirect('c_admin/data_alternatif');
-		}
-		
-			   
+			$pesan_error  = 2;
+			$this->session->set_flashdata('pesan_error',$pesan_error);
+			
+			redirect('c_admin/data_alternatif' , $data);			
+		}				   
 	}
 
 	public function tampil_edit_data_alternatif()
@@ -111,7 +131,7 @@ class C_Admin extends CI_Controller {
 	public function edit_data_alternatif()
 	{
 		$id_alternatif_get = $this->input->get('id_alternatif');
-		$this->form_validation->set_rules('nik_alternatif', 'NIK', 'callback_check_nik|required');
+		$this->form_validation->set_rules('nik_alternatif', 'NIK', 'callback_check_nik|required|min_length[16]|max_length[16]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('nik_alternatif', form_error('nik_alternatif'));
@@ -181,9 +201,6 @@ class C_Admin extends CI_Controller {
 	public function tambah_data_login()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'is_unique[data_login.username]|required');
-		// $validation = $this->form_validation->setRules([
-		// 	'username' => 'required||is_unique[data_login.username]'
-		// ]);
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('username', form_error('username'));
@@ -207,15 +224,9 @@ class C_Admin extends CI_Controller {
 				'level' => $level
 			);
 			$this->model_data->insert($data_insert,'data_login');
+			$this->session->set_flashdata('success','Berhasil Menambah Data');
 			redirect('c_admin/data_login');
 		}
-		// $login = array(
-        //     'username'  => $username,
-        //     'password'  => $password,
-		// 	'level' => $level
-        // );
-		// $this->model_data->insert($login,'login');
-		// $id_login= $this->db->insert_id();		
 	}
 
 	public function hapus_data_login()
@@ -316,7 +327,7 @@ class C_Admin extends CI_Controller {
 
 	public function tambah_data_info()
 	{
-		$this->form_validation->set_rules('no_telepon', 'No. telepon', 'is_unique[data_login.no_telepon]|required');
+		$this->form_validation->set_rules('no_telepon', 'No. telepon', 'required|min_length[11]|max_length[14]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('no_telepon', form_error('no_telepon'));
@@ -324,11 +335,10 @@ class C_Admin extends CI_Controller {
 		}
 		else
 		{
+			$username = $this->input->get('username',true);
 			$nama = $this->input->post('nama',true);
 			$divisi = $this->input->post('divisi',true);
 			$no_telepon = $this->input->post('no_telepon',true);
-			// $id_login = $this->input->get('id_login');
-			$username = $this->input->get('username',true);
 
 			$where_datalogin = array(
 				'username' => $username
@@ -341,7 +351,7 @@ class C_Admin extends CI_Controller {
 				'no_telepon'     => $no_telepon  
 			);
 			$this->model_data->edit_data($where_datalogin,$data_insert,'data_login');
-
+			$this->session->set_flashdata('success','Perubahan Data Sukses');
 			redirect('c_admin/data_info');	
 		}
 			
@@ -415,6 +425,7 @@ class C_Admin extends CI_Controller {
 			}
 		}
 		$data['awal'] = $data_awal;
+		
 
 		for ($i=0; $i <= ($n-1); $i++) { 
 			$data_jumlah[$i] = round($jmlmpb[$i],5);
@@ -500,6 +511,15 @@ class C_Admin extends CI_Controller {
 	{
 		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');
 
+		if($this->session->flashdata('pesan_error') != 0)
+		{
+			$data['pesan_error'] = $this->session->flashdata('pesan_error');
+		}
+		else
+		{
+			$data['pesan_error'] = 0;
+		}
+
 		// print($data['data_longlist'][0]['kode_longlist']);die();
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
@@ -516,7 +536,7 @@ class C_Admin extends CI_Controller {
 
 	public function tambah_data_kriteria()
 	{
-		$this->form_validation->set_rules('kode_kriteria', 'Kode Kriteria', 'is_unique[data_kriteria.kode_kriteria]|required');
+		$this->form_validation->set_rules('kode_kriteria', 'Kode Kriteria', 'is_unique[data_kriteria.kode_kriteria]|required|min_length[2]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('kode_kriteria', form_error('kode_kriteria'));
@@ -532,6 +552,7 @@ class C_Admin extends CI_Controller {
 				'nama_kriteria'  => $nama_kriteria
 			);
 			$this->model_data->insert($data_insert,'data_kriteria');
+			$this->session->set_flashdata('success','Berhasil Menambah Data');
 			redirect('c_admin/data_kriteria');
 		}
 	}
@@ -542,10 +563,22 @@ class C_Admin extends CI_Controller {
 		$where = array(            
             'id_kriteria' =>  $id_kriteria
         );
+		$cek = $this->model_data->cek_data_kriteria($id_kriteria);
 
-		// print($id_longlist);die();
-        $this->model_data->delete_data($where,'data_kriteria');
-     	redirect('c_admin/data_kriteria');		   
+		if(!empty($cek))
+		{
+			$pesan_error = 1;
+						
+			$this->session->set_flashdata('pesan_error',$pesan_error);
+			redirect('c_admin/data_kriteria');
+		}
+		else
+		{
+			$this->model_data->delete_data($where,'data_kriteria');
+			$pesan_error  = 2;
+			$this->session->set_flashdata('pesan_error',$pesan_error);
+			redirect('c_admin/data_kriteria');			
+		}	    
 	}
 
 	public function tampil_edit_data_kriteria()
@@ -568,7 +601,7 @@ class C_Admin extends CI_Controller {
 	public function edit_data_kriteria()
 	{
 		$id_kriteria_get = $this->input->get('id_kriteria');
-		$this->form_validation->set_rules('kode_kriteria', 'Kode Kriteria', 'callback_check_kode_kriteria|required');
+		$this->form_validation->set_rules('kode_kriteria', 'Kode Kriteria', 'callback_check_kode_kriteria|required|min_length[2]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('kode_kriteria', form_error('kode_kriteria'));
@@ -588,7 +621,7 @@ class C_Admin extends CI_Controller {
 				'nama_kriteria'  => $nama_kriteria
 			);
 			$this->model_data->edit_data($where,$data,'data_kriteria');
-			$this->session->set_flashdata('success','Berhasil Mengedit Data ');
+			$this->session->set_flashdata('success','Penyimpanan Data Berhasil ');
 			redirect('c_admin/data_kriteria	');		
 		}		
 	}
@@ -611,8 +644,16 @@ class C_Admin extends CI_Controller {
 	//SUB KRITERIA
 	public function data_subkriteria()
 	{
-		
 		$data['data_subkriteria'] = $this->model_data->data_subkriteria('data_subkriteria');
+		
+		if($this->session->flashdata('pesan_error') != 0)
+		{
+			$data['pesan_error'] = $this->session->flashdata('pesan_error');
+		}
+		else
+		{
+			$data['pesan_error'] = 0;
+		}
 
 		// print($data['data_longlist'][0]['kode_longlist']);die();
 		$this->load->view('admin/v_side_bar');
@@ -633,7 +674,7 @@ class C_Admin extends CI_Controller {
 
 	public function tambah_subkriteria()
 	{
-		$this->form_validation->set_rules('kode_subkriteria', 'Kode Sub Kriteria', 'is_unique[data_subkriteria.kode_subkriteria]|required');
+		$this->form_validation->set_rules('kode_subkriteria', 'Kode Sub Kriteria', 'is_unique[data_subkriteria.kode_subkriteria]|required|min_length[3]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('kode_subkriteria', form_error('kode_subkriteria'));
@@ -660,14 +701,27 @@ class C_Admin extends CI_Controller {
 
 	public function hapus_data_subkriteria()
 	{
-		$id_kriteria = $this->input->get('id_subkriteria');
+		$id_subkriteria = $this->input->get('id_subkriteria');
 		$where = array(            
-            'id_subkriteria' =>  $id_kriteria
+            'id_subkriteria' =>  $id_subkriteria
         );
+		$cek = $this->model_data->cek_data_subkriteria($id_subkriteria);
 
-		// print($id_longlist);die();
-        $this->model_data->delete_data($where,'data_subkriteria');
-     	redirect('c_admin/data_subkriteria');		   
+		if(!empty($cek))
+		{
+			$pesan_error = 1;
+						
+			$this->session->set_flashdata('pesan_error',$pesan_error);
+			redirect('c_admin/data_subkriteria');
+		}
+		else
+		{
+			$this->model_data->delete_data($where,'data_subkriteria');
+			$pesan_error  = 2;
+			$this->session->set_flashdata('pesan_error',$pesan_error);
+			
+			redirect('c_admin/data_subkriteria');
+		}				   	   
 	}
  
 	public function tampil_edit_data_subkriteria()
@@ -690,7 +744,7 @@ class C_Admin extends CI_Controller {
 	public function edit_data_subkriteria()
 	{
 		$id_subkriteria_get = $this->input->get('id_subkriteria');
-		$this->form_validation->set_rules('kode_subkriteria', 'Kode Sub Kriteria', 'callback_check_kode_subkriteria|required');
+		$this->form_validation->set_rules('kode_subkriteria', 'Kode Sub Kriteria', 'callback_check_kode_subkriteria|required|min_length[3]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('kode_subkriteria', form_error('kode_subkriteria'));
@@ -719,6 +773,7 @@ class C_Admin extends CI_Controller {
 			redirect('c_admin/data_subkriteria	');	
 		}		
 	}
+	
 	function check_kode_subkriteria($kode_subkriteria) {        
 		if($this->input->post('id_subkriteria'))
 			$id_subkriteria = $this->input->post('id_subkriteria');
@@ -825,6 +880,7 @@ class C_Admin extends CI_Controller {
 			$data['data_alternatif_nama_alter'] =null;
 			$data['data_alternatif_nama_dusun'] =null;
 		}
+		$data['kriteria_bobot'] = $this->model_data->data_kriteria_bobot();
 		
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');

@@ -15,25 +15,20 @@ class Login extends CI_Controller {
 
 	public function cek_login()
 	{
-        // $id_datalogin = $this->input->get('id_datalogin');
 		$username = $this->input->post('username');        
         $password = $this->input->post('password');
 
         $where = array(
-            // 'id_datalogin' => $id_datalogin,
             'username' => $username,
             'password' => $password
         );
 
         $cek = $this->model_data->cek($where,'data_login');
-        // print_r($cek );die();
 
         if($cek != null)
         {   
                 $ambil_user = $this->model_data->ambil_user($where,'data_login');
-                // print_r($ambil_user['id_login']);die();        
                 $data_session = array(
-                // 'id_datalogin' => $ambil_user['id_datalogin'],
                 'username' => $ambil_user['username'],
                 'password' => $ambil_user['password'],
                 'level' => $ambil_user['level'],

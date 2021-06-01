@@ -12,7 +12,7 @@ class Model_data extends CI_Model
 		return $this->db->get()->row();
 	}
 	
-	// cek unique - admin
+// cek unique - admin
 	// data login
 	function check_unique_username($id_datalogin = '', $username) {
         $this->db->where('username', $username);
@@ -46,11 +46,13 @@ class Model_data extends CI_Model
         return $this->db->get('data_subkriteria')->num_rows();
     }
 
-	
+
+// Cek insert
 	function insert($data,$table)
 	{
 		return $this->db->insert($table,$data);
 	}
+
 	function cek($where,$table)
 	{
 		$query = $this->db->get_where($table,$where);
@@ -61,6 +63,7 @@ class Model_data extends CI_Model
 		$query = $this->db->get_where($table,$where);
 		return $query->row_array();
 	}
+// cek Ascending data
 	function data($namakolom, $table)
 	{
 		$this->db->order_by($namakolom, 'ASC');
@@ -68,12 +71,8 @@ class Model_data extends CI_Model
 		// print_r($this->db->last_query()); 
 		return $query->result_array();		
 	}
-	function data_tidakurut($table){
-		// $this->db->order_by($namakolom, 'ASC');
-		$query = $this->db->get($table);
-		// print_r($this->db->last_query()); 
-		return $query->result_array();		
-	}
+
+	// Delete data
 	function delete_data($where,$table)
 	{
 		$this->db->where($where);
@@ -83,6 +82,7 @@ class Model_data extends CI_Model
 	{		
 		$this->db->delete($table);
 	}
+
 	function pilih_data($where , $table)
 	{
 		$this->db->select('*');
@@ -93,6 +93,8 @@ class Model_data extends CI_Model
 			 
 		return $data;
 	}
+
+	// insert data nilai bobot kriteria
 	function data_kriteria_bobot()
 	{
 		$this->db->select('*');
@@ -102,6 +104,16 @@ class Model_data extends CI_Model
 			 
 		return $data;
 	}
+	// get data chart insert
+	function data_kriteria_bobot_chart()
+	{
+		$this->db->select('*');
+		$this->db->from('kriteria_bobot');					
+		$query=$this->db->get();
+		return $query;
+	}
+
+	// Ambil total data sub kriteria
 	function data_subkriteria()
 	{
 		$this->db->select('*');
@@ -124,12 +136,15 @@ class Model_data extends CI_Model
 		return $data;
 	}
 
+// edit data
 	function edit_data($where,$data,$table)
 	{		
 		$this->db->where($where);
 		$this->db->update($table,$data);
 			
 	}
+
+	// ambil nilai count
 	function get_count($table)
 	{
 		$query = $this->db->query("SELECT * FROM $table");
@@ -144,25 +159,11 @@ class Model_data extends CI_Model
 		return $data;
 	}
 
-	
-	// Belum digunakan
-	// function data_login_where()
-	// {
-	// 	$this->db->select('*');
-	// 	$this->db->from('data_login');	
-	// 	// $this->db->join('data_login','data_login.id_login=login.id_login');	
-					
-	// 	$query=$this->db->get();			
-	// 	$data= $query->result_array();
-		
-	// 	return $data;
-	// }
-	
+	// tampil total data login
 	function tampil_data_login($where)
 	{
 		$this->db->select('*');
 		$this->db->from('data_login');	
-		// $this->db->join('data_login','data_login.id_login=login.id_login');	
 		$this->db->where($where);
 					
 		$query=$this->db->get();			
@@ -170,6 +171,43 @@ class Model_data extends CI_Model
 		
 		return $data;
 	}
+
+	// Mengecek data foreign key yang akan dihapus
+	function cek_data_alternatif($where)
+	{
+		$this->db->select('*');
+		$this->db->from('data_lapangan');	
+		$this->db->join('data_alternatif','data_alternatif.id_alternatif=data_lapangan.id_alternatif');	
+		$this->db->where('data_lapangan.id_alternatif', $where);				
+		$query=$this->db->get();			
+		$data= $query->row();
+		// print_r($this->db->last_query()); 
+		return $data;
+	}
+
+	function cek_data_kriteria($where)
+	{
+		$this->db->select('*');
+		$this->db->from('data_subkriteria');	
+		$this->db->join('data_kriteria','data_kriteria.id_kriteria=data_subkriteria.id_kriteria');	
+		$this->db->where('data_subkriteria.id_kriteria', $where);	
+		$query=$this->db->get();			
+		$data= $query->row();
+		// print_r($this->db->last_query()); 
+		return $data;
+	}
+	function cek_data_subkriteria($where)
+	{
+		$this->db->select('*');
+		$this->db->from('data_lapangan');	
+		$this->db->join('data_subkriteria','data_subkriteria.id_subkriteria=data_lapangan.id_subkriteria');	
+		$this->db->where('data_lapangan.id_subkriteria', $where);				
+		$query=$this->db->get();			
+		$data= $query->row();
+		// print_r($this->db->last_query()); 
+		return $data;
+	}
+
 
 
 	//pihakpelaksana
@@ -191,6 +229,15 @@ class Model_data extends CI_Model
 		// print_r($this->db->last_query()); 
 		return $data;
 	}
+	function ambil_data_kriteria($table){
+		$this->db->select('*');
+		$this->db->from($table);				
+		$query=$this->db->get();			
+		$data= $query->result_array();
+		return $data;
+	}
+
+
 	function data_survei_lapangan_where($where)
 	{
 		$this->db->select('*');
@@ -201,6 +248,7 @@ class Model_data extends CI_Model
 		return $data;
 	}    
 
+	// Ambil data total lapangan
 	function data_lapangan()
 	{
 		$this->db->select('*');
@@ -212,14 +260,9 @@ class Model_data extends CI_Model
 		return $data;
 	}
 
+
 	//crud data survei
-	function ambil_data_kriteria($table){
-		$this->db->select('*');
-		$this->db->from($table);				
-		$query=$this->db->get();			
-		$data= $query->result_array();
-		return $data;
-	}
+	
 	function tampil_data_lapangan(){
 		$query = $this->db->query("SELECT b.*,c.nama_subkriteria, c.id_subkriteria,c.nilai_subkriteria, c.id_kriteria
         FROM

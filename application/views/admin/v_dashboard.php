@@ -9,19 +9,14 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/libs/css/style.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/fontawesome/css/fontawesome-all.css">    
+    <!-- Grafik batang -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    
     <title>Dashboard</title>
 </head>
 
 <body > 
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
     <div class="dashboard-wrapper">
         <div class="dashboard-ecommerce">
             <div class="container-fluid dashboard-content ">
@@ -77,33 +72,36 @@
                         </a>
                     </div>
                 </div>
+                <div id="myfirstchart" style="height: 250px;">  
+                    <script>
+                        Morris.Line({
+                        element: 'myfirstchart',
+                        data: <?php echo $data_chart;?>,          
+                        xkey: 'id_bobot',
+                        ykeys: ['nilai_bobot'],
+                        labels: ['bobot']
+                        });
+                    </script>
+                </div>
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
+    <?php
+        $chart = array();
+        $chart = $data_chart;
+        // var_dump($chart);die();
+    ?>
+    
     <!-- jquery 3.3.1 -->
     <script src="<?php echo base_url();?>assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
     <script src="<?php echo base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="<?php echo base_url();?>assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="<?php echo base_url();?>assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 </body>
  
 </html>

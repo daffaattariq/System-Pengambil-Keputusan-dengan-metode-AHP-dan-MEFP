@@ -23,9 +23,8 @@ class C_Pihakpelaksana extends CI_Controller {
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_dashboard_pihakpelaksana',$data);
 	}
-		
-	//data lapangan
-	public function data_survey_lapangan()
+
+	public function data_survey_lapangan_cetak()
 	{	
 		//data tidak paten
 		$kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
@@ -43,8 +42,6 @@ class C_Pihakpelaksana extends CI_Controller {
 		}
 			
 		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){
-			// $data_kriteria[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
-			// $data_kriteria_nilai[$tampil_data_lapangan['nik_alternatif']][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
 			
 			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
 			$data_kriteria_nilai[$data_alternatif_lengkap_nilai[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
@@ -65,7 +62,50 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data['data_kriteria_nilai']= null;
 		}
 
-		// print($data['data_longlist'][0]['kode_longlist']);die();
+		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_data_survei_longlist_cetak' ,$data);
+	}
+		
+	//data lapangan
+	public function data_survey_lapangan()
+	{	
+		//data tidak paten
+		$kriteria = $this->model_data->ambil_data_kriteria('data_kriteria');
+		$tampil_data_lapangan = $this->model_data->tampil_data_lapangan();
+		
+		$data_kriteria=[];
+		$data_alternatif_lengkap=[];
+		$data_alternatif_lengkap_nilai=[];
+		$data_alternatif_editdelete=[];
+		foreach($tampil_data_lapangan as $key => $value){
+			$data_alternatif_lengkap[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']."-".$value['nama_dusun']);
+			$data_alternatif_editdelete[$key]= $value['nik_alternatif'];
+
+			$data_alternatif_lengkap_nilai[$key] = ($value['nik_alternatif']."-".$value['nama_alternatif']);
+		}
+			
+		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){
+			
+			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
+			$data_kriteria_nilai[$data_alternatif_lengkap_nilai[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
+			
+		}
+	
+		// print_r($data);x	
+		$data['total_kriteria']= count($kriteria);
+		$data['kriteria']= $kriteria;
+		if($data_kriteria){
+			$data['data_kriteria']= $data_kriteria;
+			$data['data_alternatif_editdelete'] =$data_alternatif_editdelete;
+
+			$data['data_kriteria_nilai']= $data_kriteria_nilai;
+		}
+		else{
+			$data['data_kriteria']= null;
+			$data['data_kriteria_nilai']= null;
+		}
+
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_data_survei_longlist' ,$data);
@@ -108,6 +148,7 @@ class C_Pihakpelaksana extends CI_Controller {
 				);
 				$this->model_data->insert($data_insert,'data_lapangan');
 			}
+			$this->session->set_flashdata('success','Berhasil Menambah Data');
 			redirect('c_pihakpelaksana/data_survey_lapangan');
 		}
 	}
@@ -141,7 +182,6 @@ class C_Pihakpelaksana extends CI_Controller {
 	{
 		//data tidak paten
 		$id_alternatif = $this->input->get('id_alternatif');
-		// $data_kriteria = $this->db->query("SELECT nama_kriteria, id_kriteria FROM data_kriteria")->result_array();
 		$data_kriteria = $this->model_data->tambah_data_kriteria('nama_kriteria','id_kriteria','data_kriteria');
 
 		foreach ($data_kriteria as $key => $data_kriteria) {
@@ -157,7 +197,6 @@ class C_Pihakpelaksana extends CI_Controller {
 				'id_alternatif'=>$id_alternatif
 			);
 			$value_id_subkriteria = $this->model_data->edit_data_lapangan('id_lapangan','data_lapangan',$where);
-			// print_r($value_id_subkriteria[0]['id_survei_longlist']);
 			$survei_lapangan = $value_id_subkriteria[0]['id_lapangan'];
 				
 			$where = array(
@@ -208,17 +247,6 @@ class C_Pihakpelaksana extends CI_Controller {
 
 	}
 
-	//SUB KRITERIA
-	public function sub_data_kriteria()
-	{
-		$data['sub_data_kriteria'] = $this->model_data->data_subkriteria('data_subkriteria');
-		// print($data['data_longlist'][0]['kode_longlist']);die();
-		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
-		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
-		
-		$this->load->view('pihakpelaksana/v_data_subkriteria_pihakpelaksana' ,$data);
-
-	}
   
 	//INFO DATA DIRI
 	public function data_info(){
@@ -236,7 +264,7 @@ class C_Pihakpelaksana extends CI_Controller {
 
 	public function tambah_data_info()
 	{
-		$this->form_validation->set_rules('no_telepon', 'No. telepon', 'is_unique[data_login.no_telepon]|required');
+		$this->form_validation->set_rules('no_telepon', 'No. telepon', 'required|min_length[11]|max_length[14]');
 		if($this->form_validation->run() == false )
 		{
 			$this->session->set_flashdata('no_telepon', form_error('no_telepon'));
@@ -244,11 +272,10 @@ class C_Pihakpelaksana extends CI_Controller {
 		}
 		else
 		{
+			$username = $this->input->get('username',true);
 			$nama = $this->input->post('nama',true);
 			$divisi = $this->input->post('divisi',true);
 			$no_telepon = $this->input->post('no_telepon',true);
-			// $id_login = $this->input->get('id_login');
-			$username = $this->input->get('username',true);
 
 			$where_datalogin = array(
 				'username' => $username
@@ -261,7 +288,7 @@ class C_Pihakpelaksana extends CI_Controller {
 				'no_telepon'     => $no_telepon  
 			);
 			$this->model_data->edit_data($where_datalogin,$data_insert,'data_login');
-
+			$this->session->set_flashdata('success','Perubahan Data Sukses');
 			redirect('c_pihakpelaksana/data_info');		
 		}
 			
@@ -306,6 +333,8 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data['data_kriteria']= null;
 			$data['data_kriteria_nilai']= null;
 		}
+
+		$data['kriteria_bobot'] = $this->model_data->data_kriteria_bobot();
 		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
@@ -330,7 +359,6 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data_alternatif_nama_dsn[$key]= ($value['nama_dusun']);
 			$data_alternatif_nama_rtrw[$key]= ($value['rt']."/".$value['rw']);
 		}
-			
 		foreach($tampil_data_lapangan as $key => $tampil_data_lapangan){	
 			$data_kriteria[$data_alternatif_lengkap[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nama_subkriteria'];
 			$data_alternatif_nik[$data_alternatif_lengkap_nik[$key]][$tampil_data_lapangan['id_kriteria']]=$tampil_data_lapangan['nilai_subkriteria'];
@@ -338,8 +366,7 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data_alternatif_nama_dusun[$data_alternatif_lengkap_nik[$key]]= $data_alternatif_nama_dsn[$key];
 			$data_alternatif_nama_rt_rw[$data_alternatif_lengkap_nik[$key]]= $data_alternatif_nama_rtrw[$key];
 		}
-	
-		// print_r($data);x	
+		
 		$data['total_kriteria']= count($kriteria);
 		$data['kriteria']= $kriteria;
 		if($data_kriteria){
@@ -349,7 +376,6 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data['data_alternatif_nama_alter'] =$data_alternatif_nama_alter;
 			$data['data_alternatif_nama_dusun'] =$data_alternatif_nama_dusun;
 			$data['data_alternatif_nama_rt_rw'] =$data_alternatif_nama_rt_rw;
-
 		}
 		else{
 			$data['data_kriteria']= null;
@@ -358,6 +384,8 @@ class C_Pihakpelaksana extends CI_Controller {
 			$data['data_alternatif_nama_alter'] =null;
 			$data['data_alternatif_nama_dusun'] =null;
 		}
+
+		$data['kriteria_bobot'] = $this->model_data->data_kriteria_bobot();
 		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');

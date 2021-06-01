@@ -10,27 +10,20 @@
     <link href="../assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/libs/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
+    
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <title>Data Survei Longlist</title>
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
     <div class="dashboard-wrapper">
         <div class="dashboard-ecommerce">
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <div class="card">
                     <h3 class="card-header">DATA SURVEI LONGLIST
-                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>
-                        
+                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>                        
                     </h3>
                     <?php
 
@@ -106,11 +99,8 @@
                     }
                     ?>
                 </div>
-                <div class="card">
-                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST
-                        <!-- <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a> -->
-                        
-                    </h3>
+                <div class="card" hidden>
+                    <h3 class="card-header">ANALISA DATA SURVEI LONGLIST</h3>
                     <?php
 
                     if(!$data_kriteria){
@@ -119,17 +109,6 @@
                     else{
                     ?>
                     <div class="card-body">
-                    <?php
-                        if ($this->session->flashdata('success')){?>
-                        <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <?php echo $this->session->flashdata('success')?>
-                        </div>
-                    <?php
-                        }
-                    ?>  
                                                  
                         <table class="table table-hover" id="mytable_nilai">
                             <thead>
@@ -137,7 +116,6 @@
                                     <th rowspan='2' style="vertical-align:middle">#</th>
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
-                                    <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
                                 </tr>
                                 <tr>
                                   <?php
@@ -159,10 +137,6 @@
                                     echo "<td align='center'>$krit[$id_kriteria]</td>";
                                   }
                             ?>
-                                  <!-- <td>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/tampil_edit_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
-                                      <a href="<?php echo base_url('c_pihakpelaksana/hapus_data_lapangan')?>?nik_alternatif=<?php echo $nik?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
-                                  </td> -->
                             <?php
                                 }
                             ?>
@@ -191,22 +165,8 @@
     <script src="<?php echo base_url();?>assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
     <script src="<?php echo base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="<?php echo base_url();?>assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="<?php echo base_url();?>assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
 
     <!-- data table -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
