@@ -72,14 +72,35 @@
                         </a>
                     </div>
                 </div>
+                <br>
+                <br>
+                <center><h3>Nilai Bobot Kriteria</h3><center>
                 <div id="myfirstchart" style="height: 250px;">  
                     <script>
-                        Morris.Line({
+                        Morris.Area({
                         element: 'myfirstchart',
-                        data: <?php echo $data_chart;?>,          
+                        data: <?php echo $data_chart;?>,
                         xkey: 'id_bobot',
                         ykeys: ['nilai_bobot'],
+                        // lineColors: ['#a0d0e0', '#3dbeee'],
                         labels: ['bobot']
+                        // parseTime : false
+                        });
+                    </script>
+                </div>
+                
+                <br>
+                <br>
+                <center><h3>Total Data Dusun</h3><center>
+                <div id="myfirstchart2" style="height: 250px;">  
+                
+                    <script>
+                        Morris.Bar({
+                        element: 'myfirstchart2',
+                        data: <?php echo $data_dusun_chart;?>,          
+                        xkey: 'nama_dusun',
+                        ykeys: ['Jumlah'],
+                        labels: ['Jumlah']
                         });
                     </script>
                 </div>

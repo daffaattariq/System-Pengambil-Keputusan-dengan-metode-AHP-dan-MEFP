@@ -223,6 +223,7 @@
 
                                 foreach($arr as $arr){
                                     $i++;
+                                    if($i<=33){
                                   ?>
                                   <tr>
                                   <td><?php echo $i?></td>
@@ -235,7 +236,7 @@
                                     <td><?php echo $i?></td>
                           
                             <?php
-                                }
+                                }}
                             ?>
                                 
                             </tbody>

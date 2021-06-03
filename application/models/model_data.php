@@ -2,15 +2,6 @@
 
 class Model_data extends CI_Model
 {
-	function login_model($username, $password, $level)
-	{
-		$this->db->select('*');
-		$this->db->from('data_login');
-		$this->db->where('username',$username);
-		$this->db->where('password',md5($password));
-		$this->db->where('level',md5($level));
-		return $this->db->get()->row();
-	}
 	
 // cek unique - admin
 	// data login
@@ -105,6 +96,15 @@ class Model_data extends CI_Model
 		return $data;
 	}
 	// get data chart insert
+	function data_dusun_chart()
+	{
+		$this->db->select('count(nama_dusun) as Jumlah , nama_dusun ');
+		$this->db->from('data_alternatif');	
+		$this->db->group_by('nama_dusun');
+		$query=$this->db->get();
+		return $query;
+	}
+
 	function data_kriteria_bobot_chart()
 	{
 		$this->db->select('*');

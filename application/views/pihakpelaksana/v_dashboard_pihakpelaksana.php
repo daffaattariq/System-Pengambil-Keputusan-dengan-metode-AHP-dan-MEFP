@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <!-- Grafik batang -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <title>Dashboard Pihak Pelaksana</title>
 </head>
 
@@ -76,6 +78,21 @@
                             </div>
                         </a>
 	                </div>
+                    
+                </div>
+                <br>
+                <br>
+                <center><h3>Nama dusun</h3><center>
+                <div id="myfirstchart2" style="height: 250px;">  
+                    <script>
+                        Morris.Bar({
+                        element: 'myfirstchart2',
+                        data: <?php echo $data_dusun_chart;?>,          
+                        xkey: 'nama_dusun',
+                        ykeys: ['Jumlah'],
+                        labels: ['Jumlah']
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -105,5 +122,8 @@
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<?php echo base_url();?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<?php echo base_url();?>assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 </body> 
 </html>

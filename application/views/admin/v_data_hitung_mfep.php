@@ -40,7 +40,6 @@
                                 <tr>
                                     <th rowspan='2' style="vertical-align:middle">#</th>
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
-                                    <!-- <th rowspan='2' style="vertical-align:middle">Nama </th> -->
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
                                 </tr>
                                 <tr>
@@ -94,7 +93,6 @@
                                     <th rowspan='2' style="vertical-align:middle">#</th>
                                     <th rowspan='2' style="vertical-align:middle">NIK Alternatif</th>
                                     <th colspan='<?php echo $total_kriteria;?>' class="text-center">Kriteria</th>
-                                    <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
                                 </tr>
                                 <tr>
                                   <?php
@@ -113,8 +111,6 @@
                                     $bobot[$count] = $kriteria_bobot['nilai_bobot'];
                                     $count++;
                                 }
-                                // var_dump($bobot);die();
-                                // $bobot = [0,0.173490603,0.127720739,0.078283327,0.038081107,0.345193219,0.237231005];
                                 $total =[];
                                 $hitung = 0;
                                 $j=0;
@@ -207,25 +203,24 @@
                                     <th>NIK Alternatif</th>
                                     <th>Total</th>
                                     <th>Rangking</th>
-                                    <!-- <th rowspan='2' style="vertical-align:middle">Aksi</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                                // $j = 0;
-                                $i=0;                      
-                                // $bobot = [0,0.173490603,0.127720739,0.078283327,0.038081107,0.345193219,0.237231005];
+                                $i=0;
 
                                 foreach($arr as $arr){
                                     $i++;
+                                    if($i<=33){
                                   ?>
                                   <tr>
                                     <td><?php echo $i?></td>
                                     <td><?php echo $arr['nik'] ?></td>
                                     <td><?php echo $arr['total'] ?></td>             
                                     <td><?php echo $i?></td>
+
                             <?php
-                                // $j++;
+                                }
                                 }
                             ?>  
                             </tbody>

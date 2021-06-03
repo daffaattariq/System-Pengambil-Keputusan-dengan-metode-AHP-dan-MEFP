@@ -5,12 +5,10 @@ class C_Admin extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		// $this->load->library('form_validation');
 		if(!$this->session->userdata('level'))
 		{
 			redirect('login');
 		}
-		// $this->load->model('model_data');
 	}
 
 	public function index()
@@ -22,6 +20,9 @@ class C_Admin extends CI_Controller {
 		//chart
 		$data_chart = $this->model_data->data_kriteria_bobot_chart()->result();
 		$data['data_chart'] = json_encode($data_chart);	
+		
+		$data_dusun_chart = $this->model_data->data_dusun_chart()->result();
+		$data['data_dusun_chart'] = json_encode($data_dusun_chart);	
 				
 
 		$this->load->view('admin/v_side_bar');
@@ -232,13 +233,6 @@ class C_Admin extends CI_Controller {
 	public function hapus_data_login()
 	{
 		$id_datalogin = $this->input->get('id_datalogin');
-		// $id_login = $this->input->get('id_login');
-
-		// print($id_login);die();
-		// $where = array(            
-        //     'id_login' =>  $id_login
-        // );
-		// $this->model_data->delete_data($where,'login');
 
 		$where = array(            
             'id_datalogin' =>  $id_datalogin
@@ -253,7 +247,6 @@ class C_Admin extends CI_Controller {
 		$where = array(            
             'id_datalogin' =>  $id_datalogin
         );
-        // $data['data_login'] = $this->model_data->pilih_data($where ,'data_login');
 		$data['data_login'] = $this->model_data->pilih_data($where,'data_login');
         $this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
@@ -273,7 +266,6 @@ class C_Admin extends CI_Controller {
 		else
 		{
 			$id_datalogin = $this->input->post('id_datalogin',true);
-			// $id_login = $this->input->post('id_login');
 			$nama = $this->input->post('nama',true);
 			$divisi = $this->input->post('divisi',true);
 			$no_telepon = $this->input->post('no_telepon',true);

@@ -18,6 +18,9 @@ class C_Pihakpelaksana extends CI_Controller {
 		$data['total_data_kriteria'] = $this->model_data->get_count('data_kriteria');
 		$data['total_data_survey_lapangan'] = $this->model_data->get_count_survey('data_lapangan');
 		$data['total_data_subkriteria'] = $this->model_data->get_count('data_subkriteria');
+
+		$data_dusun_chart = $this->model_data->data_dusun_chart()->result();
+		$data['data_dusun_chart'] = json_encode($data_dusun_chart);	
 		
 		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
 		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
