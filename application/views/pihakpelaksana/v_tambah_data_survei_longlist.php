@@ -33,7 +33,7 @@
                                     <div class="form-group">
                                         <label for="NIK">NIK<span class="text-danger">*</span></label>
                                         
-                                        <select class="form-control select2bs4 <?php if($this->session->flashdata('id_alternatif')) {?> form-control is-invalid <?php }?>" id="id_alternatif" name="id_alternatif">
+                                        <select class="form-control select2bs4 <?php if($this->session->flashdata('id_alternatif')) {?> form-control is-invalid <?php }?>" id="exampleFormControlSelect1" name="id_alternatif">
                                         <?php
 
                                             foreach ($data_lapangan_nik as $data_lapangan_nik)
@@ -60,7 +60,7 @@
                                         {
                                             ?><label class="col-form-label">C<?php echo $no+1?> - <?php echo $data_kriteria['nama_kriteria']?><span class="text-danger">*</span></label>
                                             
-                                            <select class="form-control" id="data_kriteria" name="c<?php echo $no+1?>">
+                                            <select class="form-control" id="exampleFormControlSelect1" name="c<?php echo $no+1?>">
                                             <?php
                                                 foreach ($data_lapangan1 as $data_lapangan)
                                                 {
@@ -76,6 +76,7 @@
                                         }
                                     ?>
                                     </div>
+                                    
                                     <button class="btn btn-primary btn-sm float-left mr-6" type="submit"><i class="fas fa-plus" ></i> Tambah Data</button>
                                 </form>
                             </div>
@@ -85,16 +86,16 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
     <script src="<?php echo base_url();?>assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
     <script src="<?php echo base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    
     <!-- main js -->
     <script src="<?php echo base_url();?>assets/libs/js/main-js.js"></script>
+    
+    <script src="<?php echo base_url();?>assets/css/select2.full.min.js"></script>
 
     <script>
         $(function (){

@@ -60,7 +60,7 @@
                         <a class="nav-link" href="<?php echo base_url('c_admin/data_kriteria') ?>">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="d-inline-block" href="<?php echo base_url('c_pihakpelaksana/sub_data_kriteria') ?>">
+                                    <div class="d-inline-block" href="<?php echo base_url('c_admin/data_kriteria') ?>">
                                         <h5 class="text-muted">Total Kriteria</h5>
                                         <h2 class="mb-1"><?php $a=htmlentities($total_data_kriteria, ENT_QUOTES,'utf-8'); echo($a);?></h2>
                                     </div>
@@ -71,39 +71,46 @@
                             </div>
                         </a>
                     </div>
+                    
                 </div>
                 <br>
-                <br>
-                <center><h3>Nilai Bobot Kriteria</h3><center>
-                <div id="myfirstchart" style="height: 250px;">  
-                    <script>
-                        Morris.Area({
-                        element: 'myfirstchart',
-                        data: <?php echo $data_chart;?>,
-                        xkey: 'id_bobot',
-                        ykeys: ['nilai_bobot'],
-                        // lineColors: ['#a0d0e0', '#3dbeee'],
-                        labels: ['bobot']
-                        // parseTime : false
-                        });
-                    </script>
+                <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <h5 class="card-header" align="center">Nilai Bobot Kriteria</h5>
+                        <div id="myfirstchart" style="height: 250px;">  
+                            <script>
+                                Morris.Bar({
+                                element: 'myfirstchart',
+                                data: <?php echo $data_chart;?>,
+                                xkey: 'id_bobot',
+                                ykeys: ['nilai_bobot'], 
+                                barColors: ['#a0d0e0', '#3dbeee'],
+                                labels: ['bobot']
+                                // parseTime : false
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <h5 class="card-header" align="center">Total Data Masyarakat</h5>
+                        <div id="myfirstchart2" style="height: 250px;">  
+                            <script>
+                                Morris.Bar({
+                                element: 'myfirstchart2',
+                                data: <?php echo $data_dusun_chart;?>,          
+                                xkey: 'nama_dusun',
+                                ykeys: ['Jumlah'],
+                                labels: ['Jumlah']
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
                 </div>
                 
-                <br>
-                <br>
-                <center><h3>Total Data Dusun</h3><center>
-                <div id="myfirstchart2" style="height: 250px;">  
-                
-                    <script>
-                        Morris.Bar({
-                        element: 'myfirstchart2',
-                        data: <?php echo $data_dusun_chart;?>,          
-                        xkey: 'nama_dusun',
-                        ykeys: ['Jumlah'],
-                        labels: ['Jumlah']
-                        });
-                    </script>
-                </div>
             </div>
         </div>
     </div>

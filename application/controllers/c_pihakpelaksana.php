@@ -249,6 +249,17 @@ class C_Pihakpelaksana extends CI_Controller {
 		$this->load->view('pihakpelaksana/v_data_kriteria_pihakpelaksana' ,$data);
 
 	}
+	//sub kriteria
+	public function data_subkriteria()
+	{
+		$data['data_subkriteria'] = $this->model_data->data_subkriteria('data_subkriteria');
+		// print($data['data_longlist'][0]['kode_longlist']);die();
+		$this->load->view('pihakpelaksana/v_sidebar_pihakpelaksana');
+		$this->load->view('pihakpelaksana/v_navbar_pihakpelaksana');
+		
+		$this->load->view('pihakpelaksana/v_data_subkriteria_pihakpelaksana' ,$data);
+
+	}
 
   
 	//INFO DATA DIRI
