@@ -53,7 +53,7 @@
                                 <tbody>
                                     <?php
                                         $number = 0;                
-                                        $n = 6;
+                                        $n = $jumlah_n;
                                         for($x=0; $x <= ($n - 2); $x++)
                                         {
                                             for($y=($x+1); $y <= ($n - 1) ; $y++){

@@ -26,7 +26,13 @@
                 <!-- CONTENTTTTT -->
                 <div class="card">
                     <h3 class="card-header">DATA KRITERIA
+                        <?php if($jumlah_n <= 6) 
+                        {
+                        ?>
                         <a href="<?php echo base_url('c_admin/tampil_tambah_kriteria') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>
+                        <?php
+                        }
+                        ?>
                     </h3>
                     <div class="card-body">
                         <?php

@@ -53,8 +53,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="Username">Username</label>
-                                        <input id="username" type="text" value="<?php echo $data_login['username']?>" class="form-control <?php if($this->session->flashdata('username')) {?> form-control is-invalid <?php }?>" name ="username">
-                                        <snap class='text-danger'><?php echo $this->session->flashdata('username'); ?></snap>
+                                        <input id="username" type="text" value="<?php echo $data_login['username']?>" class="form-control <?php if($this->session->flashdata('error_username')) {?> form-control is-invalid <?php }?>" name ="username">
+                                        <snap class='text-danger'><?php echo $this->session->flashdata('error_username'); ?></snap>
                                         
                                     </div>
                                     <div class="form-group">

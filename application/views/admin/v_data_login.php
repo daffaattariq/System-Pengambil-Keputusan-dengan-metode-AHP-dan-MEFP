@@ -68,7 +68,7 @@
                                     <td><?php echo $data_login['password'] ?></td>
                                     <td><?php echo $data_login['level'] ?></td>
                                     <?php 
-                                        if($data_login['username'] != 'Admin')
+                                        if($data_login['level'] != 'Admin')
                                         {
                                     ?>
                                     <td>

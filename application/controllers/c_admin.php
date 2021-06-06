@@ -204,7 +204,7 @@ class C_Admin extends CI_Controller {
 		$this->form_validation->set_rules('username', 'Username', 'is_unique[data_login.username]|required');
 		if($this->form_validation->run() == false )
 		{
-			$this->session->set_flashdata('username', form_error('username'));
+			$this->session->set_flashdata('error_username', form_error('username'));
 			redirect('c_admin/tampil_tambah_data_login');	
 		}
 		else{
@@ -260,7 +260,7 @@ class C_Admin extends CI_Controller {
 		$this->form_validation->set_rules('username', 'Username', 'callback_check_username|required');
 		if($this->form_validation->run() == false )
 		{
-			$this->session->set_flashdata('username', form_error('username'));
+			$this->session->set_flashdata('error_username', form_error('username'));
 			redirect('c_admin/tampil_edit_data_login?id_datalogin='.$id_datalogin_get.'');	
 		}
 		else
@@ -353,7 +353,10 @@ class C_Admin extends CI_Controller {
 	//PERHITUNGAN AHP
 	public function analisa_kriteria()
 	{
-		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');			
+		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');	
+		$n = count($this->model_data->ambil_data_kriteria('data_kriteria'));
+		// var_dump($n);die();
+		$data['jumlah_n'] = $n;		
 
 		// print($data['data_kriteria'][0]['kode_kriteria']);die();
 		$this->load->view('admin/v_side_bar');
@@ -366,7 +369,10 @@ class C_Admin extends CI_Controller {
 	{
 		$matrik = array();
 		$urut 	= 0;
-		$n = 6;
+		// $n = 6;
+		$n = count($this->model_data->ambil_data_kriteria('data_kriteria'));
+		// var_dump($n);die();
+		$data['jumlah_n'] = $n;
 		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');
 		$data['data_kriteria1'] = $this->model_data->data('kode_kriteria','data_kriteria');
 		$data['data_kriteria2'] = $this->model_data->data('kode_kriteria','data_kriteria');
@@ -470,14 +476,14 @@ class C_Admin extends CI_Controller {
 		}
 
 		$nilai = 0;
-		for($x=0; $x<6; $x++){
+		for($x=0; $x<$n; $x++){
 			$lamda[$x] = $jmlkp[$x] / $pv[$x];
 			$nilai = $nilai + $lamda[$x];
 		}
 		
-		$nilai = $nilai/6;
+		$nilai = $nilai/$n;
 		$ir = 1.24;
-		$ci = ($nilai-6)/(6-1);
+		$ci = ($nilai-$n)/($n-1);
 		//dibawah 0.01 konsiSten , diatas  tidak konsisten
 		$cr = $ci/$ir;
 			
@@ -502,6 +508,9 @@ class C_Admin extends CI_Controller {
 	public function data_kriteria()
 	{
 		$data['data_kriteria'] = $this->model_data->data('kode_kriteria','data_kriteria');
+		$n = count($this->model_data->ambil_data_kriteria('data_kriteria'));
+		// var_dump($n);die();
+		$data['jumlah_n'] = $n + 1;	
 
 		if($this->session->flashdata('pesan_error') != 0)
 		{
@@ -521,6 +530,7 @@ class C_Admin extends CI_Controller {
 
 	public function tampil_tambah_kriteria()
 	{
+
 		$this->load->view('admin/v_side_bar');
 		$this->load->view('admin/v_navbar');
 		$this->load->view('admin/v_tambah_data_kriteria' );		

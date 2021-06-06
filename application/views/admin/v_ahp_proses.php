@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $n =6;
+                                $n = $jumlah_n;
                                 $x = 0;
                                 $y=0;
                                 for ($x=0; $x<=($n-1); $x++){
@@ -111,7 +111,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $n =6;
+                                $n = $jumlah_n;
                                 $x = 0;
                                 $y=0;
                                 for ($x=0; $x <= ($n-1) ; $x++) {
@@ -168,7 +168,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $n =6;
+                                $n = $jumlah_n;
                                 $x = 0;
                                 $y=0;
                                 for ($x=0; $x <= ($n-1) ; $x++) {

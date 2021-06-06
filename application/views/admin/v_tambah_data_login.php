@@ -35,8 +35,8 @@
                                 <form action="<?php echo base_url('c_admin/tambah_data_login') ?>" method="post">
                                     <div class="form-group">
                                         <label for="Username">Username<span class="text-danger">*</span></label>
-                                        <input  type="text" placeholder="Username" class="form-control <?php if($this->session->flashdata('username')) {?> form-control is-invalid <?php }?>" name ="username" required> 
-                                        <snap class='text-danger'><?php echo $this->session->flashdata('username'); ?></snap>
+                                        <input  type="text" placeholder="Username" class="form-control <?php if($this->session->flashdata('error_username')) {?> form-control is-invalid <?php }?>" name ="username" required> 
+                                        <snap class='text-danger'><?php echo $this->session->flashdata('error_username'); ?></snap>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Password<span class="text-danger">*</span></label>

@@ -69,7 +69,8 @@
                                             else
                                             {
                                         ?>
-                                                <input id="divisi" type="text" class="form-control" value="<?php echo $data_info['divisi']?>" name="divisi">
+                                                <!-- <input id="divisi" type="text" class="form-control" value="<?php echo $data_info['divisi']?>" name="divisi"> -->
+                                                <input id="inputText3" type="text" class="form-control" value="TFL" name="divisi" disabled>
                                         <?php
                                             }
                                         ?>                                               

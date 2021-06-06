@@ -72,6 +72,7 @@
                                             {
                                         ?>
                                                 <input id="inputText3" type="text" class="form-control" value="<?php echo $data_info['divisi']?>" name="divisi">
+                                                
                                         <?php
                                             }
                                         ?>                                               
