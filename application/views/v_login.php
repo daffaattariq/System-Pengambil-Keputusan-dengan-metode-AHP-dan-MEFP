@@ -11,6 +11,7 @@
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/libs/css/style.css">
     <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="shortcut icon" href="<?php echo base_url();?>assets/images/IBM_Sanitasi.png">
     <style>
     html,
         body {

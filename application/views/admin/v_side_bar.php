@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/charts/morris-bundle/morris.css">
     
     <link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="<?php echo base_url();?>assets/images/IBM_Sanitasi.png">
     
 </head>
 <body>

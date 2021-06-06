@@ -24,9 +24,7 @@
             <div class="container-fluid dashboard-content ">
                 <!-- CONTENTTTTT -->
                 <div class="card">
-                    <h3 class="card-header">DATA SURVEI LONGLIST
-                        <a href="<?php echo base_url('c_pihakpelaksana/tampil_tambah_data_lapangan') ?>"><button class="btn btn-primary btn-sm float-right mr-6" type="button"><i class="fas fa-plus" ></i> Tambah Data</button></a>                        
-                    </h3>
+                    <h3 class="card-header">DATA SURVEI LONGLIST</h3>
                     <?php
 
                     if(!$data_kriteria){
