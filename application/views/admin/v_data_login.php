@@ -67,17 +67,19 @@
                                     <td><?php echo $data_login['username'] ?></td>
                                     <td><?php echo $data_login['password'] ?></td>
                                     <td><?php echo $data_login['level'] ?></td>
+                                    <td>
                                     <?php 
                                         if($data_login['level'] != 'Admin')
                                         {
                                     ?>
-                                    <td>
+                                    
                                         <a href="<?php echo base_url('c_admin/tampil_edit_data_login')?>?id_datalogin=<?php echo $data_login['id_datalogin']?>"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
                                         <a href="<?php echo base_url('c_admin/hapus_data_login')?>?id_datalogin=<?php echo $data_login['id_datalogin'] ?>"><button class="btn btn-sm btn-danger "><i class="fas fa-trash-alt"></i></button></a>
-                                    </td>
+                                    
                                     <?php
                                         }
                                         ?>
+                                    </td>
                                 </tr>
                                 <?php
                                     }
